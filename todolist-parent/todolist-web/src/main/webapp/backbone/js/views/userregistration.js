@@ -1,5 +1,5 @@
 window.UserRegistrationView = Backbone.View.extend({
-
+	className:'box',
     initialize:function () {
         console.log('Initializing User registration View');
         this.template = _.template(tpl.get('userregistration'));

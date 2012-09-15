@@ -126,4 +126,12 @@ form.bs-docs-login {
 
 .white{
 	color: white;
-}	
+}
+
+.box > h2{
+    background-color: #B0D02F;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+    color: #333333;
+}
