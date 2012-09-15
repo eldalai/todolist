@@ -100,7 +100,7 @@ body {
   font-size: 13px;
   line-height: 18px;
   color: #333333;
-  background-color: #ffffff;
+  background-color: #333333;
 }
 a {
   color: #0088cc;
@@ -3363,6 +3363,6 @@ a.thumbnail:hover {
 .invisible {
   visibility: hidden;
 }
-.hero-unit:hover{
-	box-shadow:2px 2px 2px gray;
-}	
+.hero-unit{
+	box-shadow:6px 13px 14px 10px windowtext;
+}
