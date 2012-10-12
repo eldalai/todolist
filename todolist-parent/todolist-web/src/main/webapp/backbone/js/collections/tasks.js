@@ -13,8 +13,7 @@ var app = app || {};
 		// Reference to this collection's model.
 		model: app.Task,
 
-		// Save all of the todo items under the `"todos"` namespace.
-		localStorage: new Store('todos-backbone'),
+		url:"../../rest/tasks",
 
 		// Filter down the list of all todo items that are finished.
 		completed: function() {
@@ -43,7 +42,7 @@ var app = app || {};
 		}
 	});
 
-	// Create our global collection of **Todos**.
-	app.Todos = new TodoList();
+	// Create our global collection of **Task**.
+	app.TaskList = new TaskList();
 
 }());
