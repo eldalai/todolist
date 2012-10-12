@@ -4,3 +4,17 @@
 *.jar
 *.war
 *.ear
+
+# Eclipse Files #
+.classpath
+.project
+*.prefs
+*.component
+*.core.xml
+
+# Logs #
+*.log*
+
+/*/target/
+/*/*/target/
+target/

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+    <bean id="jndi" class="org.apache.xbean.spring.jndi.DefaultContext" >
+        <property name="entries">
+            <map>
+                <entry key="java:comp/env/todolist/url" value="http://localhost:8080/todolist" />
+                <entry key="java:comp/env/db/hbmDialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+
+<!-- 	            <entry key="java:comp/env/db/type" value="HSQL" /> -->
+<!-- 	            <entry key="java:comp/env/db/jdbcDriver" value="org.hsqldb.jdbcDriver"/> -->
+<!-- 	            <entry key="java:comp/env/db/url" value="jdbc:hsqldb:mem:todolist"/> -->
+<!-- 	            <entry key="java:comp/env/db/user" value="sa"/> -->
+<!-- 	            <entry key="java:comp/env/db/password" value=""/> -->
+
+                <entry key="java:comp/env/db/type" value="MYSQL" />
+                <entry key="java:comp/env/db/jdbcDriver" value="com.mysql.jdbc.Driver" />
+    		    <entry key="java:comp/env/db/url" value="jdbc:mysql://localhost:3306/todolist"/>
+                <entry key="java:comp/env/db/user" value="root"/>
+                <entry key="java:comp/env/db/password" value="root"/>
+                
+                <entry key="java:comp/env/db/showSql" value="false"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>
