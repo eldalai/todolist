@@ -35,7 +35,7 @@ var AppRouter = Backbone.Router.extend({
         // Close the search dropdown on click anywhere in the UI
         $('body').click(function () {
             $('.dropdown').removeClass("open");
-        });
+        }); 
     },
 
     home:function () {
