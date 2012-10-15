@@ -22,6 +22,7 @@ var AppRouter = Backbone.Router.extend({
         "contact":"contact",
         "employees/:id":"employeeDetails",
         "" : "login"
+        	
     },
 
     initialize:function () {

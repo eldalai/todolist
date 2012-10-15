@@ -17,7 +17,7 @@ window.LoginView = Backbone.View.extend({
     login:function (event) {
         event.preventDefault(); // Don't let this button submit the form
         $('.alert-error').hide(); // Hide any errors on a new submit
-        var url = '../api/login';
+        var url = '../rest/session';
         console.log('Loggin in... ');
         var formValues = {
             email: $('#inputEmail').val(),
@@ -28,7 +28,7 @@ window.LoginView = Backbone.View.extend({
             url:url,
             type:'POST',
             dataType:"json",
-            data: formValues,
+            data: { email: $('#inputEmail').val(), password: $('#inputPassword').val() },
             success:function (data) {
                 console.log(["Login request details: ", data]);
                
@@ -36,7 +36,7 @@ window.LoginView = Backbone.View.extend({
                     $('.alert-error').text(data.error.text).show();
                 }
                 else { // If not, send them back to the home page
-                    window.location.replace('#');
+                    window.location.replace('#taskslist'); // todo: tasklist
                 }
             }
         });
