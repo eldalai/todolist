@@ -61,6 +61,8 @@ public class RestTaskServices extends UserController implements IRestTaskService
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<Task> listTasks(HttpSession session){
 		User user = (User) session.getAttribute("user");
+		if( user == null )
+			throw new SecurityException("No user in session");
 		return iTaskServices.listTask( user );
 	}
 
