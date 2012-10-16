@@ -30,7 +30,7 @@ public class RestSessionServices extends UserController implements IRestSessionS
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public User login(String email, String password,  HttpSession session, HttpServletRequest request) {
+	public User login(String email, String password,  HttpSession session) {
 		User user;
 		try {
 			user = userServices.findUser(email, password);

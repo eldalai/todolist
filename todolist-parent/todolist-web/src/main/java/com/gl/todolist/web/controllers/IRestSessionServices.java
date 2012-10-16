@@ -9,7 +9,7 @@ import com.gl.todolist.web.controllers.impl.Login;
 
 public interface IRestSessionServices {
 	//
-	User login(String user, String password,  HttpSession session, HttpServletRequest request);
+	User login(String user, String password,  HttpSession session);
 
 
 }
