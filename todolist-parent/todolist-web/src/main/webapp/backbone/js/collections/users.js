@@ -1,19 +1,19 @@
-var app = app || {};
-
-(function() {
-	'use strict';
+//var app = app || {};
+//
+//(function() {
+//	'use strict';
 
 	// User Collection
 	// ---------------
 
 	// The collection of users is backed by *localStorage* instead of a remote
 	// server.
-	var UserList = Backbone.Collection.extend({
+window.UserList = Backbone.Collection.extend({
 
 		// Reference to this collection's model.
 		model: app.User,
 
-		url:"../../rest/users",
+		url:"../rest/users",
 		
 		// Filter down the list of all todo items that are finished.
 		otherUsers: function() {
@@ -23,8 +23,8 @@ var app = app || {};
 		}
 
 	});
-
-	// Create our global collection of **UserList**.
-	app.UserList = new UserList();
-
-}());
+//
+//	// Create our global collection of **UserList**.
+//	app.UserList = new UserList();
+//
+//}());

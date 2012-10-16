@@ -21,7 +21,8 @@ var AppRouter = Backbone.Router.extend({
         "home":"home",
         "contact":"contact",
         "employees/:id":"employeeDetails",
-        "" : "login"
+        "" : "login",
+        "reassigntask": "reassigntask"
     },
 
     initialize:function () {
@@ -64,11 +65,15 @@ var AppRouter = Backbone.Router.extend({
     
     login: function() {
         $('#content').html(new LoginView().render().el);
+    },
+    
+    reassigntask: function() {
+        $('#content').html(new ReassignTaskView().render().el);
     }
 
 });
 
-tpl.loadTemplates(['home','header', 'login'],
+tpl.loadTemplates(['home','header', 'login', 'reassigntask'],
     function () {
         app = new AppRouter();
         Backbone.history.start();
