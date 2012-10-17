@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 public class Task implements Serializable{
 	
@@ -19,7 +21,7 @@ public class Task implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@NotNull
-	private Long title;
+	private String title;
 	@NotNull
 	private TaskStatus taskStatus;
 	@NotNull
@@ -37,11 +39,11 @@ public class Task implements Serializable{
 		this.id = id;
 	}
 	
-	public void setTitle(Long title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public Long getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
@@ -60,7 +62,7 @@ public class Task implements Serializable{
 	public void setTaskType(TaskType taskType) {
 		this.taskType = taskType;
 	}
-	
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
