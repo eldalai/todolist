@@ -8,7 +8,8 @@ var app = app || {};
 
 	// Our basic **Todo** model has `title`, `order`, and `completed` attributes.
 	app.Task = Backbone.Model.extend({
-
+		
+		urlRoot:"../../rest/tasks",
 		// Default attributes for the todo
 		// and ensure that each todo created has `title` and `completed` keys.
 		defaults: {
