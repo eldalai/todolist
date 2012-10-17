@@ -19,6 +19,7 @@ var AppRouter = Backbone.Router.extend({
 
     routes:{
         "home":"home",
+        "taskdetail":"taskdetail",
         "contact":"contact",
         "employees/:id":"employeeDetails",
         "" : "login",
@@ -78,11 +79,15 @@ var AppRouter = Backbone.Router.extend({
     },
     userregistration: function() {
         $('#content').html(new UserRegistrationView().render().el);
+    },
+    taskdetail: function() {
+    	console.log("task function");
+        $('#content').html(new TaskDetailView().render().el);
     }
 
 });
 
-tpl.loadTemplates(['home','header', 'login', 'reassigntask',"taskslist","userregistration"],
+tpl.loadTemplates(['home','header', 'login', 'reassigntask',"taskslist","userregistration",'taskdetail'],
     function () {
         app = new AppRouter();
         Backbone.history.start();
