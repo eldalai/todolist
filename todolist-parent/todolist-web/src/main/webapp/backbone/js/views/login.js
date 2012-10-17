@@ -6,7 +6,8 @@ window.LoginView = Backbone.View.extend({
     },
 
     events: {
-        "click #loginButton": "login"
+        "click #loginButton": "login",
+        "click #createAcount": "createAcount"	
     },
 
     render:function () {
@@ -40,5 +41,24 @@ window.LoginView = Backbone.View.extend({
                 }
             }
         });
-    }
+    },
+    
+	createAcount:function(event){
+        event.preventDefault(); // Don't let this button submit the form
+        $('.alert-error').hide(); // Hide any errors on a new submit
+        var url = 'tpl/userregistration.html';
+        $.ajax({
+        	
+            url:url,
+            type:'POST',
+
+            success:function () {
+                    window.location.replace('#userregistration');
+
+            }
+        });
+	}
+    
+    
+    
 });
