@@ -14,7 +14,7 @@ window.TasksListView = Backbone.View.extend({
 
     render:function () {
     	$(this.el).empty();
-        _.each(this.model.models, function (user) {
+        _.each(this.model.models, function (task) {
             $(this.el).append(new TasksItemView({model:task}).render().el);
         }, this);
         return this;
