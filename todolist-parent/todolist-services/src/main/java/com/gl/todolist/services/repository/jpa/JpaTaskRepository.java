@@ -5,10 +5,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
 import com.gl.todolist.domain.Task;
+import com.gl.todolist.domain.User;
 import com.gl.todolist.services.repository.ITaskRepository;
 
 @Repository
@@ -33,8 +35,10 @@ public class JpaTaskRepository implements ITaskRepository{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Task> findTasks(){
-		List<Task> resultList = em.createQuery("FROM Task").getResultList();
+	public List<Task> findTasks(User user){
+		Query q = em.createQuery("FROM Task where user = :user");
+        q.setParameter("user", user);
+		List<Task> resultList = q.getResultList();
 		return resultList;
 	}
 

@@ -14,5 +14,6 @@ public interface IUserServices {
 	void deleteUser(Long id) throws EntityNotFoundException;
 	List<User> listUser();
 	User findUser(Long id) throws EntityNotFoundException;
+	User findUser(String email, String password) throws EntityNotFoundException;
 	
 }

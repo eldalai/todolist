@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 public class BaseController {
 	
+	 @ResponseStatus(value=HttpStatus.FORBIDDEN)
+	 @ExceptionHandler(value = SecurityException.class)
+	 public void securityException( Exception exception, HttpServletResponse response ) throws Throwable{
+		 returnResponse(exception, response);
+	 }
+	 
 	 @ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
 	 @ExceptionHandler(value = Exception.class)
 	 public void serverException( Exception exception, HttpServletResponse response ) throws Throwable{

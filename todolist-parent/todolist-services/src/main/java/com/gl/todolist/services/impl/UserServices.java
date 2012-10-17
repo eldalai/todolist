@@ -55,4 +55,11 @@ public class UserServices implements IUserServices{
 		return user;
 	}
 
+	@Override
+	public User findUser(String email, String password)
+			throws EntityNotFoundException {
+		User user = userRepository.find(email, password);
+		return user;
+	}
+
 }
