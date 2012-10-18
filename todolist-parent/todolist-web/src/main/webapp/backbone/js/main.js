@@ -87,7 +87,8 @@ var AppRouter = Backbone.Router.extend({
 
 });
 
-tpl.loadTemplates(['home','header', 'login', 'reassigntask',"taskslist","userregistration",'taskdetail'],
+
+tpl.loadTemplates(['home','header', 'login', 'reassigntask','reassigntaskitem',"taskslist","userregistration",'taskdetail'],
     function () {
         app = new AppRouter();
         Backbone.history.start();
