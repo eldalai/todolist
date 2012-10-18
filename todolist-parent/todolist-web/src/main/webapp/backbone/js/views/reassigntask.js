@@ -1,5 +1,16 @@
 window.ReassignTaskView = Backbone.View.extend({
 
+    initialize:function () {
+		this.template = _.template(tpl.get('reassigntask'));
+    },
+
+    render:function () {
+    	$(this.el).html(this.template());
+    	$('#reassigntask-content', this.el).html(new ReassignTaskListView().render().el);
+    	return this;
+    }
+});
+window.ReassignTaskListView = Backbone.View.extend({
     tagName:'ul',
 
     className:'nav nav-list',
@@ -29,7 +40,7 @@ window.ReassignTaskItemView = Backbone.View.extend({
     tagName:"li",
 
     initialize:function () {
-		this.template = _.template(tpl.get('reassigntask'));
+		this.template = _.template(tpl.get('reassigntaskitem'));
         this.model.bind("change", this.render, this);
         this.model.bind("destroy", this.close, this);
     },

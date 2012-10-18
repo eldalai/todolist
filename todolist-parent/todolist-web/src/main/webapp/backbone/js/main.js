@@ -19,6 +19,7 @@ var AppRouter = Backbone.Router.extend({
 
     routes:{
         "home":"home",
+        "taskdetail":"taskdetail",
         "contact":"contact",
         "employees/:id":"employeeDetails",
         "" : "login",
@@ -34,7 +35,7 @@ var AppRouter = Backbone.Router.extend({
         // Close the search dropdown on click anywhere in the UI
         $('body').click(function () {
             $('.dropdown').removeClass("open");
-        });
+        }); 
     },
 
     home:function () {
@@ -78,11 +79,16 @@ var AppRouter = Backbone.Router.extend({
     },
     userregistration: function() {
         $('#content').html(new UserRegistrationView().render().el);
+    },
+    taskdetail: function() {
+    	console.log("task function");
+        $('#content').html(new TaskDetailView().render().el);
     }
 
 });
 
-tpl.loadTemplates(['home','header', 'login', 'reassigntask',"taskslist","userregistration"],
+
+tpl.loadTemplates(['home','header', 'login', 'reassigntask','reassigntaskitem',"taskslist","userregistration",'taskdetail'],
     function () {
         app = new AppRouter();
         Backbone.history.start();

@@ -1,0 +1,25 @@
+<form class="form-horizontal">
+	<div class="taskdetail">
+	
+		<div class="left">
+		
+			<label class="control-label" for="inputEmail">Title</label>
+			<label class="control-label" for="inputEmail">Task Status</label>
+			<label class="control-label" for="inputEmail">Task Type</label>
+		</div>
+		<div class="right">
+			<input type="text" id="title" />
+			<div class="status">
+				<input type="radio" name="status" value="pending" checked> Pending 
+				<input type="radio" name="status" value="done" > Done
+			</div>
+			<div class="type">
+				<input type="radio" name="type" value="normal" checked> Normal
+				<input type="radio" name="type" value="urgent" > Urgent
+			</div>
+		</div>
+		
+
+	</div>
+	<input type="submit" value="Save">
+</form>
