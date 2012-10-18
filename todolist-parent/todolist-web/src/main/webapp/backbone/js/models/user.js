@@ -1,4 +1,4 @@
-var app = app || {};
+//var app = app || {};
 
 (function() {
 	'use strict';
@@ -7,7 +7,8 @@ var app = app || {};
 	// ----------
 
 	// Our basic **User** model has `id`, `name` attributes.
-	app.User = Backbone.Model.extend({
+	
+	window.User = Backbone.Model.extend({
 
 		urlRoot:"../../rest/users",
 		
@@ -15,7 +16,8 @@ var app = app || {};
 		// and ensure that each user created has `id` and `name` keys.
 		defaults: {
 			id: 0,
-			name: ''
+			name: '',
+			password:''
 		}
 
 	});
