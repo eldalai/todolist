@@ -18,14 +18,12 @@ $.ajaxSetup({
 var AppRouter = Backbone.Router.extend({
 
     routes:{
-        "home":"home",
-        "taskdetail":"taskdetail",
-        "contact":"contact",
-        "employees/:id":"employeeDetails",
-        "" : "login",
-        "reassigntask": "reassigntask",
-        "taskslist":"taskslist",
-        "userregistration":"userregistration"
+		"" : "login",
+		"contact":"contact",
+		"userregistration":"userregistration",
+		"taskslist":"taskslist",
+        "taskdetail/:id":"taskdetail",
+        "reassigntask/:id": "reassigntask"
     },
 
     initialize:function () {
@@ -55,23 +53,20 @@ var AppRouter = Backbone.Router.extend({
         $('#content').html(this.contactView.el);
     },
 
-    employeeDetails:function (id) {
-        var employee = new Employee({id:id});
-        employee.fetch({
-            success:function (data) {
-                // Note that we could also 'recycle' the same instance of EmployeeFullView
-                // instead of creating new instances
-                $('#content').html(new EmployeeFullView({model:data}).render().el);
-            }
-        });
-    },
-    
     login: function() {
         $('#content').html(new LoginView().render().el);
     },
     
-    reassigntask: function() {
-        $('#content').html(new ReassignTaskView().render().el);
+    reassigntask: function(id) {
+    	var task = new Task({id:id});
+    	task.fetch({
+            success:function (data) {
+                // Note that we could also 'recycle' the same instance of EmployeeFullView
+                // instead of creating new instances
+	    		$('#content').html(new ReassignTaskView({model:data}).render().el);
+            }
+        });
+    	
     },
     
     taskslist: function() {
