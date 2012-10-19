@@ -18,7 +18,10 @@
 			expression="com.gl.todolist.services.*" />
 
 		<context:include-filter type="regex"
-			expression="com.gl.todolist.repository.*" />     
+			expression="com.gl.todolist.repository.*" /> 
+			
+		<context:include-filter type="regex"
+			expression="com.gl.todolist.mail.*" />		    
 
 	</context:component-scan>
 
@@ -28,6 +31,14 @@
 				<property name="jndiName" value="java:comp/env/todolist/url" />
 			</bean>
 		</constructor-arg>
+	</bean>
+	
+	<bean name="emailFrom" class="java.lang.String">
+	<constructor-arg>
+		<bean class="org.springframework.jndi.JndiObjectFactoryBean">
+			<property name="jndiName" value="java:comp/env/mail/serverUrl" />
+		</bean>
+	</constructor-arg>
 	</bean>
 
 	<!-- Transactions driven by annotations -->
@@ -86,6 +97,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="jpaVendor" />
 	</bean>
+	<import resource="mailSender-context.xml"/>
 
 </beans>
 

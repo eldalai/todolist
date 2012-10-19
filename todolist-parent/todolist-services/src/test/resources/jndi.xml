@@ -12,7 +12,7 @@
     <bean id="jndi" class="org.apache.xbean.spring.jndi.DefaultContext" >
         <property name="entries">
             <map>
-                <entry key="java:comp/env/todolist/url" value="http://localhost:8080/todolist" />
+                <entry key="java:comp/env/todolist/url" value="http://localhost:8080/todolist-web/backbone/index.html" />
                 <entry key="java:comp/env/db/hbmDialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 
 <!-- 	            <entry key="java:comp/env/db/type" value="HSQL" /> -->
@@ -26,8 +26,12 @@
     		    <entry key="java:comp/env/db/url" value="jdbc:mysql://localhost:3306/todolist"/>
                 <entry key="java:comp/env/db/user" value="root"/>
                 <entry key="java:comp/env/db/password" value="root"/>
-                
                 <entry key="java:comp/env/db/showSql" value="false"/>
+
+                <entry key="java:comp/env/mail/serverUrl" value="localhost"/>
+                <entry key="java:comp/env/mail/serverPort" value="9090"/>
+                <entry key="java:comp/env/mail/serverUser" value="user"/>
+                <entry key="java:comp/env/mail/serverPassword" value="pass"/>
             </map>
         </property>
     </bean>
