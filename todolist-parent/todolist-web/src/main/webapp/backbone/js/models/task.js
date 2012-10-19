@@ -1,19 +1,19 @@
-var app = app || {};
-
-(function() {
-	'use strict';
+//var app = app || {};
+//
+//(function() {
+//	'use strict';
 
 	// Todo Model
 	// ----------
 
 	// Our basic **Todo** model has `title`, `order`, and `completed` attributes.
-	app.Task = Backbone.Model.extend({
+	window.Task = Backbone.Model.extend({
 		
-		urlRoot:"../../rest/tasks",
+		urlRoot:"../rest/tasks",
 		// Default attributes for the todo
 		// and ensure that each todo created has `title` and `completed` keys.
 		defaults: {
-			id: 0,
+			id: null,
 			title: '',
 			taskStatus: '', // PENDING, DONE
 			taskType: '' // NORMAL, URGENT 
@@ -28,5 +28,5 @@ var app = app || {};
 		}
 
 	});
-
-}());
+//
+//}());

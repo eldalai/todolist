@@ -100,7 +100,7 @@ body {
   font-size: 13px;
   line-height: 18px;
   color: #333333;
-  background-color: #ffffff;
+  background-color: #333333;
 }
 a {
   color: #0088cc;
@@ -3045,15 +3045,18 @@ a.thumbnail:hover {
   padding: 9px;
 }
 .label {
-  padding: 1px 3px 2px;
-  font-size: 9.75px;
-  font-weight: bold;
-  color: #ffffff;
-  text-transform: uppercase;
-  background-color: #999999;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+    background-color: #999999;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 28px;
+    border-top-right-radius: 7px;
+    color: #FFFFFF;
+    font-size: 13.75px;
+    font-weight: bold;
+    padding-bottom: 2px;
+    padding-left: 39px;
+    padding-right: 57px;
+    padding-top: 1px;
+    text-transform: uppercase;
 }
 .label-important {
   background-color: #b94a48;
@@ -3066,6 +3069,7 @@ a.thumbnail:hover {
 }
 .label-info {
   background-color: #3a87ad;
+  margin-left: 2px;
 }
 @-webkit-keyframes progress-bar-stripes {
   from {
@@ -3363,6 +3367,6 @@ a.thumbnail:hover {
 .invisible {
   visibility: hidden;
 }
-.hero-unit:hover{
-	box-shadow:2px 2px 2px gray;
-}	
+.hero-unit{
+	box-shadow:6px 13px 14px 10px windowtext;
+}

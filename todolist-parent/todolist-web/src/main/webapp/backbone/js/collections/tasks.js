@@ -2,7 +2,7 @@
 	var TaskList = Backbone.Collection.extend({
 
 		// Reference to this collection's model.
-		model: app.Task,
+		model: Task,
 
 		url:"../rest/tasks",
 

@@ -18,14 +18,14 @@ $.ajaxSetup({
 var AppRouter = Backbone.Router.extend({
 
     routes:{
-        "home":"home",
-        "taskdetail":"taskdetail",
-        "contact":"contact",
-        "employees/:id":"employeeDetails",
         "" : "login",
-        "reassigntask": "reassigntask",
+        "contact":"contact",
+        "userregistration":"userregistration",
         "taskslist":"taskslist",
-        "userregistration":"userregistration"
+        "taskdetail/:id":"taskdetail",
+        "reassigntask/:id": "reassigntask",
+        "employees/:id":"employeeDetails",
+        "newtask":"newtask"
     },
 
     initialize:function () {
@@ -55,23 +55,20 @@ var AppRouter = Backbone.Router.extend({
         $('#content').html(this.contactView.el);
     },
 
-    employeeDetails:function (id) {
-        var employee = new Employee({id:id});
-        employee.fetch({
-            success:function (data) {
-                // Note that we could also 'recycle' the same instance of EmployeeFullView
-                // instead of creating new instances
-                $('#content').html(new EmployeeFullView({model:data}).render().el);
-            }
-        });
-    },
-    
     login: function() {
         $('#content').html(new LoginView().render().el);
     },
     
-    reassigntask: function() {
-        $('#content').html(new ReassignTaskView().render().el);
+    reassigntask: function(id) {
+    	var task = new Task({id:id});
+    	task.fetch({
+            success:function (data) {
+                // Note that we could also 'recycle' the same instance of EmployeeFullView
+                // instead of creating new instances
+	    		$('#content').html(new ReassignTaskView({model:data}).render().el);
+            }
+        });
+    	
     },
     
     taskslist: function() {
@@ -83,12 +80,15 @@ var AppRouter = Backbone.Router.extend({
     taskdetail: function() {
     	console.log("task function");
         $('#content').html(new TaskDetailView().render().el);
+    },
+    newtask: function(){
+    	$('#content').html(new NewTaskView().render().el);
     }
 
 });
 
 
-tpl.loadTemplates(['home','header', 'login', 'reassigntask','reassigntaskitem',"taskslist","userregistration",'taskdetail'],
+tpl.loadTemplates(['home','header', 'login', 'reassigntask','reassigntaskitem',"taskslist",'taskslistitem',"userregistration",'taskdetail','newtask'],
     function () {
         app = new AppRouter();
         Backbone.history.start();

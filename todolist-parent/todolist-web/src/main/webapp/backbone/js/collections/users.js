@@ -11,7 +11,7 @@
 window.UserList = Backbone.Collection.extend({
 
 		// Reference to this collection's model.
-		model: app.User,
+		model: User,
 
 		url:"../rest/users",
 		
