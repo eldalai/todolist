@@ -1,0 +1,36 @@
+<h1>New Task</h1>
+<br><br>
+<div class="alert alert-error" style="display:none;">
+</div>
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="inputTitle">Title</label>
+    <div class="controls">
+      <input type="text" id="inputTitle" placeholder="Title">
+    </div>    
+  </div>
+   <div class="control-group">
+    <label class="control-label" for="inputStatus">Status</label>
+    <div class="controls">
+      <select id="status">
+		  <option value="0">Pending</option>
+		  <option value="1">Done</option>
+	 </select> 
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputType">Type</label>
+    <div class="controls">
+      <select id="type">
+		  <option value="0">Normal</option>
+		  <option value="1">Urgent</option>
+	 </select> 
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn" id="createnewtask">Create</button>
+      <button type="submit" class="btn" id="cancel">Cancel</button>
+    </div>
+  </div>
+</form>

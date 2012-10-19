@@ -18,12 +18,14 @@ $.ajaxSetup({
 var AppRouter = Backbone.Router.extend({
 
     routes:{
-		"" : "login",
-		"contact":"contact",
-		"userregistration":"userregistration",
-		"taskslist":"taskslist",
+        "" : "login",
+        "contact":"contact",
+        "userregistration":"userregistration",
+        "taskslist":"taskslist",
         "taskdetail/:id":"taskdetail",
-        "reassigntask/:id": "reassigntask"
+        "reassigntask/:id": "reassigntask",
+        "employees/:id":"employeeDetails",
+        "newtask":"newtask"
     },
 
     initialize:function () {
@@ -78,12 +80,15 @@ var AppRouter = Backbone.Router.extend({
     taskdetail: function() {
     	console.log("task function");
         $('#content').html(new TaskDetailView().render().el);
+    },
+    newtask: function(){
+    	$('#content').html(new NewTaskView().render().el);
     }
 
 });
 
 
-tpl.loadTemplates(['home','header', 'login', 'reassigntask','reassigntaskitem',"taskslist","userregistration",'taskdetail'],
+tpl.loadTemplates(['home','header', 'login', 'reassigntask','reassigntaskitem',"taskslist",'taskslistitem',"userregistration",'taskdetail','newtask'],
     function () {
         app = new AppRouter();
         Backbone.history.start();
