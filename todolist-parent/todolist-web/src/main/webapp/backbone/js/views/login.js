@@ -6,7 +6,7 @@ window.LoginView = Backbone.View.extend({
     },
 
     events: {
-        "click #loginButton": "login",
+        "click #loginButton": "authenticate",
         "click #createAcount": "createAcount"	
     },
 
@@ -15,20 +15,17 @@ window.LoginView = Backbone.View.extend({
         return this;
     },
 
-    login:function (event) {
+    authenticate:function (event) {
         event.preventDefault(); // Don't let this button submit the form
         $('.alert-error').hide(); // Hide any errors on a new submit
-        var url = '../rest/session';
-        console.log('Loggin in... ');
-        var formValues = {
-            email: $('#inputEmail').val(),
-            password: $('#inputPassword').val()
-        };
 
         $.ajax({
-            url:url,
+            url:'../rest/session',
             type:'POST',
             dataType:"json",
+            beforeSend:function(){            
+            	console.log('Loggin in... ');
+            },
             data: { email: $('#inputEmail').val(), password: $('#inputPassword').val() },
             success:function (data) {
                 console.log(["Login request details: ", data]);
