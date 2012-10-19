@@ -23,6 +23,7 @@ import com.gl.todolist.services.IUserServices;
 import com.gl.todolist.services.exceptions.UserException;
 import com.gl.todolist.web.controllers.IRestTaskServices;
 import com.gl.todolist.web.controllers.IRestUserServices;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/tasks")
@@ -38,7 +39,11 @@ public class RestTaskServices extends UserController implements IRestTaskService
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Task saveTask(@RequestBody Task task) throws UserException{
+	public Task saveTask(@RequestBody Task task, HttpSession session) throws UserException{
+		User user = (User)session.getAttribute("user");
+		if(user!=null){
+			task.setUser(user);	
+		}		
 		return iTaskServices.saveUpdateTask(task);
 	}
 	
