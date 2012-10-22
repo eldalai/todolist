@@ -12,7 +12,7 @@ import com.gl.todolist.services.exceptions.UserException;
 public interface IRestTaskServices {
 	
 	Task saveTask(Task task, HttpSession session) throws UserException;
-	Task updateTask(Task task)throws UserException;
+	Task updateTask(Task task, HttpSession session)throws UserException;
 	void deleteTask(Long id)throws EntityNotFoundException;
 	List<Task> listTasks(HttpSession session);
 	Task findTask(Long id)throws EntityNotFoundException;

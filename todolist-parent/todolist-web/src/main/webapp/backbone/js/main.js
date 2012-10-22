@@ -25,7 +25,8 @@ var AppRouter = Backbone.Router.extend({
         "taskdetail/:id":"taskdetail",
         "reassigntask/:id": "reassigntask",
         "employees/:id":"employeeDetails",
-        "newtask":"newtask"
+        "newtask":"newtask",
+        "editTask/:id":"editTask"
     },
 
     initialize:function () {
@@ -88,7 +89,19 @@ var AppRouter = Backbone.Router.extend({
         });
         
     },
+    editTask: function(id) {
+    	var task = new Task({id:id});
+    	task.fetch({
+            success:function (data) {
+                // Note that we could also 'recycle' the same instance of EmployeeFullView
+                // instead of creating new instances
+            	$('#content').html(new NewTaskView({model:data}).render().el);
+            }
+        });
+        
+    },
     newtask: function(){
+    	   	
     	$('#content').html(new NewTaskView().render().el);
     }
 

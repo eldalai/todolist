@@ -50,7 +50,11 @@ public class RestTaskServices extends UserController implements IRestTaskService
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
-	public Task updateTask(@RequestBody @Valid Task task) throws UserException{
+	public Task updateTask(@RequestBody @Valid Task task,HttpSession session) throws UserException{
+		User user = (User)session.getAttribute("user");
+		if(user!=null){
+			task.setUser(user);	
+		}	
 		return iTaskServices.saveUpdateTask(task);
 	}
 
