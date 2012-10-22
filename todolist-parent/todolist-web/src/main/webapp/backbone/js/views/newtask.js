@@ -24,13 +24,19 @@ window.NewTaskView = Backbone.View.extend({
         event.preventDefault(); // Don't let this button submit the form
         $('.alert-error').hide(); // Hide any errors on a new submit
         //var url = '../rest/tasks';   
-        var task = new Task({title: $('#inputTitle').val(), taskStatus : parseInt($("#status").val()), taskType : parseInt($("#type").val())});
-        //this.model.set();
-        task.save({
-            success:function (data) {
-            	console.log(["New Task: ", data]);
-            }	
-        });
+        if($('#inputTitle').val()!=''){
+        	var task = new Task({title: $('#inputTitle').val(), taskStatus : parseInt($("#status").val()), taskType : parseInt($("#type").val())});
+            //this.model.set();
+            task.save({
+                success:function (data) {
+                	console.log(["New Task: ", data]);
+                }	
+            });
+            window.location.replace('#taskslist');
+        }else{
+        	$('.alert-error').show();
+        }
+        
 //        $.ajax({
 //            url:url,
 //            type:'POST',
