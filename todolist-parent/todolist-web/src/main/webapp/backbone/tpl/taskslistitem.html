@@ -1,4 +1,19 @@
-<a href='#taskdetail/<%= id %>'>
-   
-    <p class="list-item"><%= title %></p>
-</a>
+<table>
+	<tr>
+		<td>
+			<p class="list-item"><%= title %></p>
+		</td>
+		<td>
+			<a href="#taskdetail/<%= id %>"><i class="icon-list-alt"
+				title="See details"></i>
+		</td>
+		
+		
+		<td>
+		<a href="#reassigntask/<%= id %>"><i class="icon-arrow-right"
+				title="Reassign Task"></i>
+		
+		</td>
+	</tr>
+
+</table>

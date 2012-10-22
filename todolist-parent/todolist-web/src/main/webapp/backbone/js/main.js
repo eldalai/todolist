@@ -77,9 +77,16 @@ var AppRouter = Backbone.Router.extend({
     userregistration: function() {
         $('#content').html(new UserRegistrationView().render().el);
     },
-    taskdetail: function() {
-    	console.log("task function");
-        $('#content').html(new TaskDetailView().render().el);
+    taskdetail: function(id) {
+    	var task = new Task({id:id});
+    	task.fetch({
+            success:function (data) {
+                // Note that we could also 'recycle' the same instance of EmployeeFullView
+                // instead of creating new instances
+            	$('#content').html(new TaskDetailView({model:data}).render().el);
+            }
+        });
+        
     },
     newtask: function(){
     	$('#content').html(new NewTaskView().render().el);
