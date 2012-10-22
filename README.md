@@ -1,7 +1,7 @@
 todolist
 ========
 
-Todolist example using Maven Java Spring REST HTML Backbone OAuth2
+Todolist example using Maven Java Spring REST HTML Backbone (TODO: OAuth2)
 
 eclipse setup:
 
@@ -10,7 +10,7 @@ mvn eclipse:clean eclipse:eclipse
 Setup BD:
 todolist-parent\todolist-web\src\main\webapp\META-INF\context.xml
 
-<?xml version="1.0" encoding="UTF-8"?>
+<xml>
 <Context antiJARLocking="true" path="">   
 
     <Environment name="todolist/url" value="http://localhost:8080/todolist" type="java.lang.String" override="false" />
@@ -23,3 +23,4 @@ todolist-parent\todolist-web\src\main\webapp\META-INF\context.xml
     <Environment name="db/password" value="todo" type="java.lang.String" override="false" />
 
 </Context>
+</xml>
