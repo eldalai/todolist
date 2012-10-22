@@ -17,7 +17,7 @@ window.NewTaskView = Backbone.View.extend({
     },
 	
 	cancel:function(event){
-
+		window.location.replace('#taskslist');
 	},
     
 	createnewtask:function(event) {
