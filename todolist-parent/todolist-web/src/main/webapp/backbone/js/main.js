@@ -144,7 +144,7 @@
 				            data: { email: id, token: tokenid },
 				            success:function (data) {
 				                console.log(["Login request details: ", data]);
-				           	 	$('#content').html(new LoginView({}).render().el);
+				           	 	$('#content').html(new app.LoginView({}).render().el);
 				           	 	$('#errorLogin').hide();
 				           	 	$('#confirmation').show();
 				            },
