@@ -14,5 +14,6 @@ public interface IUserRepository{
 	List<User> findUsers();
 	User validateNameUser(User user);
 	User find(String email, String password) throws EntityNotFoundException;
+	User userByEmail(String email);
 
 }

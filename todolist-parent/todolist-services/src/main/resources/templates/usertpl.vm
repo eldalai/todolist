@@ -9,7 +9,7 @@
 <p><B>Hello: </B> ${user.name}
 <br>
 <br>
-<a href="$url">link</a>
+<a href="$url#token/$user.name/$user.token">link</a>
 
 </body>
 </html>

@@ -34,7 +34,7 @@ public class RestUserServices extends UserController implements IRestUserService
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public User saveUser(@RequestBody @Valid User user) throws UserException{
+	public User saveUser(@RequestBody User user) throws UserException{
 		return iUserServices.saveUser(user);
 	}
 	

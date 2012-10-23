@@ -86,5 +86,31 @@ public class UserServices implements IUserServices{
 		msg.setSubject(Constants.SUBJECT);
 		sendUser.send(msg, hTemplateVariables);
 	}
+	
+	public User userConfirmation( String email, String token )throws UserException{
+		User user = null;
+		user = userRepository.userByEmail(email);
+		if(user==null){
+			throw new UserException(MessagesExceptions.USER_NOT_FOUND);
+		}
+		if(!user.getToken().equalsIgnoreCase(token)){
+			throw new UserException(MessagesExceptions.INVALID_TOKEN);
+		}
+		user.setStateUser(true);
+		user = userRepository.saveUpdateUser(user);
+		return user;
+	}
+	
+	public User login(String email, String password) throws UserException {
+		User user = null;
+		user = userRepository.find(email, password);
+		if(user==null){
+			throw new UserException(MessagesExceptions.USER_NOT_FOUND);
+		}
+		if(!user.isStateUser()){
+			throw new UserException(MessagesExceptions.USER_INACTIVE);
+		}
+		return user;
+	}
 
 }

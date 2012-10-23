@@ -11,6 +11,8 @@
 *.prefs
 *.component
 *.core.xml
+.externalToolBuilders
+
 
 # Logs #
 *.log*

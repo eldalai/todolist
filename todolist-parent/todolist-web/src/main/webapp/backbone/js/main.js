@@ -25,7 +25,8 @@ var AppRouter = Backbone.Router.extend({
         "taskdetail/:id":"taskdetail",
         "reassigntask/:id": "reassigntask",
         "employees/:id":"employeeDetails",
-        "newtask":"newtask"
+        "newtask":"newtask",
+        "token/:id/:tokenid":"confirm"
     },
 
     initialize:function () {
@@ -83,6 +84,27 @@ var AppRouter = Backbone.Router.extend({
     },
     newtask: function(){
     	$('#content').html(new NewTaskView().render().el);
+    },
+    confirm: function(id, tokenid){
+    	 var url = '../rest/session';
+         console.log('checking email confirmation... ');
+      	 $.ajax({
+	            url:url,
+	            type:'PUT',
+	            dataType:"json",
+	            data: { email: id, token: tokenid },
+	            success:function (data) {
+	                console.log(["Login request details: ", data]);
+	           	 	$('#content').html(new LoginView({}).render().el);
+	           	 	$('#errorLogin').hide();
+	           	 	$('#confirmation').show();
+	            },
+	            error: function(jqXHR, textStatus, errorThrown) {
+	            	$('#errorLogin').text("Error").show();
+	            	$('#confirmation').text("Your email has been verified.").hide();
+	            }
+	        });
+
     }
 
 });

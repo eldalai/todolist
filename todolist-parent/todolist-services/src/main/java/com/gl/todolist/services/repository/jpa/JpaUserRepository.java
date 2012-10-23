@@ -64,5 +64,18 @@ public class JpaUserRepository implements IUserRepository{
 			return null;
 		}
 	}
+	
+	public User userByEmail(String email) throws EntityNotFoundException{
+		try{
+			Query q = em.createQuery("SELECT user FROM User user WHERE user.name =:nameUser");
+			q.setParameter("nameUser", email);
+			User user = (User)q.getSingleResult();
+			if(user == null)
+				throw new EntityNotFoundException();
+		    return user;
+		}catch(NoResultException ex){
+			return null;
+		}
+	}
 
 }

@@ -12,7 +12,15 @@ window.LoginView = Backbone.View.extend({
 
     render:function () {
     	 $(this.el).html(this.template());
-        return this;
+    	 // si esta en modo confirmation
+    	 	//si ok:
+    	 		//$('.alert-success)
+    	 	//sino
+    	 		//$('.alert-error').
+    	 
+    	 
+    	 
+    	 return this;
     },
 
     login:function (event) {
@@ -20,27 +28,29 @@ window.LoginView = Backbone.View.extend({
         $('.alert-error').hide(); // Hide any errors on a new submit
         var url = '../rest/session';
         console.log('Loggin in... ');
-        var formValues = {
-            email: $('#inputEmail').val(),
-            password: $('#inputPassword').val()
-        };
+        var tkn = $('#tokenid').val();
 
-        $.ajax({
-            url:url,
-            type:'POST',
-            dataType:"json",
-            data: { email: $('#inputEmail').val(), password: $('#inputPassword').val() },
-            success:function (data) {
-                console.log(["Login request details: ", data]);
-               
-                if(data.error) {  // If there is an error, show the error messages
-                    $('.alert-error').text(data.error.text).show();
-                }
-                else { // If not, send them back to the home page
-                    window.location.replace('#taskslist'); // todo: tasklist
-                }
-            }
-        });
+	        $.ajax({
+	            url:url,
+	            type:'POST',
+	            dataType:"json",
+	            data: { email: $('#inputEmail').val(), password: $('#inputPassword').val() },
+	            success:function (data) {
+	                console.log(["Login request details: ", data]);
+	               
+	                if(data.error) {  // If there is an error, show the error messages
+	                    $('.alert-error').text(data.error.text).show();
+	                }
+	                else { // If not, send them back to the home page
+	                    window.location.replace('#taskslist'); // todo: tasklist
+	                }
+	            },
+	            error: function( data ) {
+	            	 $('.alert-error').text(data.statusText + ' - ' + data.responseText ).show();
+//	            	$('#errorLogin').show();
+//	            	$('#confirmation').hide();
+	            }
+	        });
     },
     
 	createAcount:function(event){

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.gl.todolist.domain.User;
 import com.gl.todolist.services.IUserServices;
+import com.gl.todolist.services.exceptions.UserException;
 import com.gl.todolist.web.controllers.IRestSessionServices;
 
 @Controller
@@ -30,10 +31,10 @@ public class RestSessionServices extends UserController implements IRestSessionS
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public User login(String email, String password,  HttpSession session) {
+	public User login(String email, String password,  HttpSession session) throws UserException {
 		User user;
 		try {
-			user = userServices.findUser(email, password);
+			user = userServices.login(email, password);
 		} catch (EntityNotFoundException e) {
 			throw new SecurityException();
 		}
@@ -42,4 +43,12 @@ public class RestSessionServices extends UserController implements IRestSessionS
 		return user;
 	}
 	
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public User confirmation(String email, String token) throws UserException {
+		User user = null;
+		userServices.userConfirmation(email, token);
+		return user;
+	}
 }
