@@ -1,25 +1,23 @@
-<form class="form-horizontal">
-	<div class="taskdetail">
-	
-		<div class="left">
-		
-			<label class="control-label" for="inputEmail">Title</label>
-			<label class="control-label" for="inputEmail">Task Status</label>
-			<label class="control-label" for="inputEmail">Task Type</label>
-		</div>
-		<div class="right">
-			<input type="text" id="title" />
-			<div class="status">
-				<input type="radio" name="status" value="pending" checked> Pending 
-				<input type="radio" name="status" value="done" > Done
-			</div>
-			<div class="type">
-				<input type="radio" name="type" value="normal" checked> Normal
-				<input type="radio" name="type" value="urgent" > Urgent
-			</div>
-		</div>
-		
-
-	</div>
-	<input type="submit" value="Save">
-</form>
+<div class="alert alert-error" style="display:none;">
+</div>
+<span class="white label label-info">Task Detail</span>
+<form class="form-horizontal hero-unit">
+  <div class="control-group">
+    <label class="control-label" for="title">Title:</label>
+    <div class="controls" id="title"><%= title%></div>
+    
+  </div>
+   <div class="control-group">
+    <label class="control-label" for="status">Status:</label>
+   <div class="controls" id="status"><%= taskStatus %></div>
+    
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="type">Type:</label>
+   <div class="controls" id="type"><%= taskType %> </div>
+    </div>
+  </div>
+  <div class="control-group">
+  <div  class="controls"><a href="#taskslist" class="btn">Cancel</a></div>
+  </div>
+</form> 

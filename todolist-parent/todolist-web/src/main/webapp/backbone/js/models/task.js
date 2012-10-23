@@ -17,14 +17,6 @@
 			title: '',
 			taskStatus: '', // PENDING, DONE
 			taskType: '' // NORMAL, URGENT 
-		},
-
-		// Toggle the `completed` state of this todo item.
-		toggle: function() {
-			this.save({
-				// TODO: cambiar de estado...
-				//completed: !this.get('completed')
-			});
 		}
 
 	});

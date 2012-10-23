@@ -6,7 +6,7 @@ window.LoginView = Backbone.View.extend({
     },
 
     events: {
-        "click #loginButton": "login",
+        "click #loginButton": "authenticate",
         "click #createAcount": "createAcount"	
     },
 
@@ -23,7 +23,7 @@ window.LoginView = Backbone.View.extend({
     	 return this;
     },
 
-    login:function (event) {
+    authenticate:function (event) {
         event.preventDefault(); // Don't let this button submit the form
         $('.alert-error').hide(); // Hide any errors on a new submit
         var url = '../rest/session';
@@ -47,8 +47,6 @@ window.LoginView = Backbone.View.extend({
 	            },
 	            error: function( data ) {
 	            	 $('.alert-error').text(data.statusText + ' - ' + data.responseText ).show();
-//	            	$('#errorLogin').show();
-//	            	$('#confirmation').hide();
 	            }
 	        });
     },

@@ -1119,7 +1119,7 @@ table .span12 {
   width: 14px;
   height: 14px;
   vertical-align: text-top;
-/*   background-image: url(../img/glyphicons-halflings.png); */
+  background-image: url(../img/glyphicons-halflings.png); 
   background-position: 14px 14px;
   background-repeat: no-repeat;
   *margin-right: .3em;
@@ -3047,7 +3047,7 @@ a.thumbnail:hover {
 .label {
     background-color: #999999;
     border-bottom-left-radius: 0;
-    border-top-left-radius: 28px;
+    border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     color: #FFFFFF;
     font-size: 13.75px;
