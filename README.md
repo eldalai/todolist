@@ -21,6 +21,12 @@ todolist-parent\todolist-web\src\main\webapp\META-INF\context.xml
     <Environment name="db/url" value="jdbc:mysql://localhost:3306/todolist" type="java.lang.String" override="false" />
     <Environment name="db/user" value="todolist" type="java.lang.String" override="false" />
     <Environment name="db/password" value="todo" type="java.lang.String" override="false" />
+	
+	<Environment name="mail/emailFrom" value="noreply@ourdoughmain.com" type="java.lang.String" override="false" />
+    <Environment name="mail/serverUrl" value="smtp.gmail.com" type="java.lang.String" override="false" />
+    <Environment name="mail/serverPort" value="587" type="java.lang.String" override="false" />
+    <Environment name="mail/serverUser" value="cursosgloballogic@gmail.com" type="java.lang.String" override="false" />
+    <Environment name="mail/serverPassword" value="cursosdegloballogic3" type="java.lang.String" override="false" />
 
 </Context>
 </xml>
