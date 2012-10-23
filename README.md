@@ -1,7 +1,7 @@
 todolist
 ========
 
-Todolist example using Maven Java Spring REST HTML Backbone (TODO: OAuth2)
+Todolist example using Maven Java Spring REST HTML Backbone RequireJS (TODO: OAuth2)
 
 eclipse setup:
 
