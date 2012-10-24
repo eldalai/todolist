@@ -146,7 +146,7 @@
 				                console.log(["Login request details: ", data]);
 				           	 	$('#content').html(new app.LoginView({}).render().el);
 				           	 	$('#errorLogin').hide();
-				           	 	$('#confirmation').show();
+				           	 	$('#confirmation').text("Your email has been verified.").show();
 				            },
 				            error: function(jqXHR, textStatus, errorThrown) {
 				            	$('#errorLogin').text("Error").show();
