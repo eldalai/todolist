@@ -1,0 +1,136 @@
+@black: #ffffff;
+@dark: #333333;
+@grey: #DDDDDD;
+@lightgrey: #F5F5F5;
+@green: #B0D02F;
+@darkgrey: #9DA0A4;
+
+.rounded-corners-colors (@radius: none) {
+   /* FireFox */
+  -moz-border-bottom-colors: @radius;
+  -moz-border-left-colors: @radius;
+  -moz-border-right-colors: @radius;
+  -moz-border-top-colors: @radius;
+}
+
+.padding(@top:0px,@right:0px, @bottom: 0px, @left: 0px){
+    padding: @arguments;
+}
+
+.margin(@top:0px,@right:0px, @bottom: 0px, @left: 0px){
+    margin: @arguments;
+}
+
+.font(@size, @weight){
+	font: @arguments;
+}
+
+.border(top,@width,@style, @color){
+	border-top: @width @style @color;
+}
+
+.border(right,@width,@style, @color){
+	border-right: @width @style @color;
+}
+
+.border(bottom,@width,@style, @color){
+	border-bottom: @width @style @color;
+}
+
+.border(left,@width,@style, @color){
+	border-left:  @width @style @color;
+}
+
+.border-image(){
+	border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-source: none;
+    border-image-width: 1 1 1 1;
+}
+
+.border-radius(top,@left,@right){
+ 	border-top-left-radius: @left;
+    border-top-right-radius: @right;
+}
+
+.border-radius(bottom,@left,@right){
+ 	border-bottom-left-radius: @left;
+    border-bottom-right-radius: @right;
+}
+
+/********* Particular CSS *************/
+
+.dropdown-menu {
+    max-height: 400px;
+    overflow-y: scroll;
+    width: 220px;
+}
+
+.list-item {
+    .padding(6px,0px,0px,56px);
+}
+
+.no-reports {
+    display: none;
+}
+
+footer{
+	color:@black;
+	.margin(5px);
+	float: right;
+}
+
+/* boxbla */
+.bs-docs-login:after {
+    .rounded-corners-colors;
+    background-color: @lightgrey;
+    .border-image;
+    .border(bottom,1px, solid,@grey);
+    .border(left,1px, solid,@grey);
+    .border(right,1px, solid,@grey);
+    .border(top,1px, solid,@grey);
+    .border-radius(bottom,0px,4px);
+    .border-radius(top,4px,0px);
+    color: @darkgrey;
+    content: "Login";
+    .font(12px,bold);
+    .padding(3px,7px,3px,7px);
+    position: absolute;
+    top: -1px;
+    left: -1px;
+}
+
+
+
+form.bs-docs-login {
+    .padding(0,0,19px,0);
+}
+.bs-docs-login {
+    .rounded-corners-colors;
+	/*background-color: #FFFFFF;*/
+    .border-image;
+    .border(bottom,1px,solid,@grey);
+    .border(left,1px,solid,@grey);
+    .border(right,1px,solid,@grey);
+    .border(top,1px,solid,@grey);
+    .border-radius(bottom,4px,4px);
+    .border-radius(top,4px,4px);
+    .margin(15px,0px,15px,0px);
+    .padding(39px,19px,0px,19px);
+    position: relative;
+}
+
+.white{
+	color: white;
+}
+
+.box > h2{
+    background-color: @green;
+    .border-radius(top,7px,7px);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset; /*FireFox*/
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset; /* Chrome */
+    o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset; /*Opera*/
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+    color: @dark;
+}
