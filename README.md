@@ -1,7 +1,7 @@
 todolist
 ========
 
-Todolist example using Maven Java Spring REST HTML Backbone RequireJS (TODO: OAuth2)
+Todolist example using Maven Java Spring REST HTML Backbone RequireJS LESS (TODO: OAuth2)
 
 eclipse setup:
 
@@ -9,6 +9,22 @@ mvn eclipse:clean eclipse:eclipse
 
 Setup BD:
 todolist-parent\todolist-web\src\main\webapp\META-INF\context.xml
+
+------- LESS --------
+
+Site URL: http://lesscss.org/
+
+Maven integration: http://mojo.codehaus.org/lesscss-maven-plugin/usage.html
+
+source directory: /todolist-web/src/main/webapp/backbone/less
+output directory: /todolist-web/src/main/webapp/backbone/css
+
+compile LESS files: 
+
+cd /todolist/todolist-parent/todolist-web/
+run maven command: mvn lesscss:compile
+
+Recommended IDE: Sublime Text Editor 2 with LESS package
 
 <xml>
 <Context antiJARLocking="true" path="">   
