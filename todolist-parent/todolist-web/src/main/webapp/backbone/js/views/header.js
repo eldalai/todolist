@@ -9,6 +9,7 @@
 	        ], function($,_,Backbone,template){
 		
 		context.HeaderView = Backbone.View.extend({
+			el: $('.header'),
 			
 			initialize:function () {
 				this.template = _.template(template);
@@ -16,10 +17,9 @@
 				//this.searchresultsView = new EmployeeListView({model:this.searchResults, className:'dropdown-menu'});
 			},
 			
-			render:function (eventName) {
+			render:function () {
 				$(this.el).html(this.template());
 				//$('.navbar-search', this.el).append(this.searchresultsView.render().el);
-				return this;
 			},
 			
 			events:{

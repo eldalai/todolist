@@ -10,6 +10,8 @@
 		
 		context.HomeView = Backbone.View.extend({
 			
+			el: $('#content'),
+			
 			initialize:function () {
 				console.log('Initializing Home View');
 				this.template = _.template( template );
@@ -20,8 +22,7 @@
 			},
 			
 			render:function (eventName) {
-				$(this.el).html(this.template());
-				return this;
+				$(this.el).html( this.template() );
 			},
 			
 			showMeBtnClick:function () {

@@ -10,6 +10,7 @@
 	        ], function($,_,Backbone,template){
 		
 		context.UserRegistrationView = Backbone.View.extend({
+			el: $('#content'),
 			className:'box',
 			initialize:function () {
 				console.log('Initializing User registration View');
@@ -24,7 +25,6 @@
 			
 			render:function () {
 				$(this.el).html(this.template());
-				return this;
 			},
 			
 			cancel:function(event){

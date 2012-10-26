@@ -10,13 +10,14 @@
 		
 		context.TaskDetailView = Backbone.View.extend({
 			
+			el: $('#content'),
+			
 			initialize:function () {
 				this.template = _.template(template);
 			},
 			
 			render:function () {
 				$(this.el).html(this.template(this.model.toJSON()));
-				return this;
 			}
 			
 		});

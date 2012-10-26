@@ -10,6 +10,8 @@
 		
 		context.LoginView = Backbone.View.extend({
 			
+			el: $('#content'),
+			
 			initialize:function () {
 				console.log('Initializing Login View');
 				this.template = _.template(template);
@@ -21,13 +23,12 @@
 			},
 			
 			render:function () {
-				 $(this.el).html(this.template());
+				$(this.el).html(this.template());
 		    	 // si esta en modo confirmation
 		    	 	//si ok:
 		    	 		//$('.alert-success)
 		    	 	//sino
 		    	 		//$('.alert-error').
-		    	 return this;
 			},
 			
 			authenticate:function (event) {

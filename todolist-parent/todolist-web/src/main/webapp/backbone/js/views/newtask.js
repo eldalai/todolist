@@ -10,7 +10,7 @@
 	        ], function($,_,Backbone,template){
 		
 		context.NewTaskView = Backbone.View.extend({
-			
+			el: $('#content'),
 			initialize:function () {
 
 		     	if(this.model==null){
@@ -31,7 +31,6 @@
 			
 			render:function () {
 				$(this.el).html(this.template(this.model.toJSON()));
-				return this;
 			},
 			
 			cancel:function(event){
@@ -46,7 +45,7 @@
 				//var url = '../rest/tasks';   
 
 				if($('#inputTitle').val()!=''){
-					if(this.model.id==null){
+					if(this.model.id == null){
 						var task = new context.Task({title: $('#inputTitle').val(), taskStatus : parseInt($("#status").val()), taskType : parseInt($("#type").val())});
 					}else{
 						var task = new context.Task({title: $('#inputTitle').val(), taskStatus : parseInt($("#status").val()), taskType : parseInt($("#type").val()),id : this.model.id});

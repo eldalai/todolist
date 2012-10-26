@@ -12,18 +12,20 @@
 		
 		context.ReassignTaskView = Backbone.View.extend({
 			
+			el: $('#content'),
+			
 			initialize:function () {
 				this.template = _.template(template);
 			},
 			
 			render:function () {
 				$(this.el).html(this.template(this.model.toJSON()));
-				$('#reassigntask-content', this.el).html(new context.ReassignTaskListView().render().el);
-				return this;
+				new context.ReassignTaskListView( { el : $('#reassigntask-content', this.el) } ).render();
 			}
 		});
 		
 		context.ReassignTaskListView = Backbone.View.extend({
+		
 			tagName:'ul',
 			
 			className:'nav nav-list',
@@ -39,12 +41,11 @@
 			},
 			
 			render:function () {
-				
-				$(this.el).empty();
+				var self = this; 
+				$(self.el).empty();
 				_.each(this.model.models, function (user) {
-					$(this.el).append(new context.ReassignTaskItemView({model:user}).render().el);
+					new context.ReassignTaskItemView({model:user, el: $(self.el) }).render();
 				}, this);
-				return this;
 			}
 		});
 		
@@ -59,8 +60,7 @@
 			},
 			
 			render:function () {
-				$(this.el).html(this.template(this.model.toJSON()));
-				return this;
+				$(this.el).append(this.template(this.model.toJSON()));
 			}
 			
 		});

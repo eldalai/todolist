@@ -2,7 +2,8 @@ var app = app || {};
 
 define([
         'jquery','underscore','backbone','views/header','views/home','views/login','views/reassigntask',
-        'views/userregistration','views/taskslist','views/newtask','views/taskdetail','models/task'
+        'views/userregistration','views/taskslist','views/newtask','views/taskdetail','views/contact',
+        'models/task'
         ], function($,_,Backbone){
 	
 		app.AppRouter = Backbone.Router.extend({
@@ -21,7 +22,7 @@ define([
 			
 			initialize:function () {
 				this.headerView = new app.HeaderView();
-				$('.header').html(this.headerView.render().el);
+				this.headerView.render();
 				
 				// Close the search dropdown on click anywhere in the UI
 				$('body').click(function () {
@@ -33,21 +34,19 @@ define([
 				// Since the home view never changes, we instantiate it and render it only once
 				if (!this.homeView) {
 					this.homeView = new app.HomeView();
-					this.homeView.render();
 				}
-				$('#content').html(this.homeView.el);
+				this.homeView.render();
 			},
 			
 			contact:function () {
 				if (!this.contactView) {
 					this.contactView = new app.ContactView();
-					this.contactView.render();
 				}
-				$('#content').html(this.contactView.el);
+				this.contactView.render();
 			},
 			
 			login: function() {
-				$('#content').html(new app.LoginView().render().el);
+				new app.LoginView().render();
 			},
 			
 			reassigntask: function(id) {
@@ -56,7 +55,7 @@ define([
 					success:function (data) {
 						// Note that we could also 'recycle' the same instance of EmployeeFullView
 						// instead of creating new instances
-						$('#content').html(new app.ReassignTaskView({model:data}).render().el);
+						new app.ReassignTaskView({model:data}).render();
 					}
 				});
 				
@@ -66,7 +65,7 @@ define([
 				$('#content').html(new app.TasksListView().render().el);
 			},
 			userregistration: function() {
-				$('#content').html(new app.UserRegistrationView().render().el);
+				new app.UserRegistrationView().render();
 			},
 			taskdetail: function(id) {
 		     	var task = new app.Task({id:id});
@@ -74,7 +73,7 @@ define([
 		             success:function (data) {
 		                 // Note that we could also 'recycle' the same instance of EmployeeFullView
 		                 // instead of creating new instances
-		             	$('#content').html(new app.TaskDetailView({model:data}).render().el);
+		             	new app.TaskDetailView({model:data}).render();
 		             }
 		         });
 				         
@@ -85,13 +84,13 @@ define([
 		             success:function (data) {
 		                 // Note that we could also 'recycle' the same instance of EmployeeFullView
 		                 // instead of creating new instances
-		             	$('#content').html(new app.NewTaskView({model:data}).render().el);
+		             	new app.NewTaskView({model:data}).render();
 		             }
 		         });
 			         
 			},
 			newtask: function(){
-				$('#content').html(new app.NewTaskView().render().el);
+				new app.NewTaskView().render();
 			},
 			 confirm: function(id, tokenid){
 		    	 var url = '../rest/session';
@@ -103,7 +102,7 @@ define([
 			            data: { email: id, token: tokenid },
 			            success:function (data) {
 			                console.log(["Login request details: ", data]);
-			           	 	$('#content').html(new app.LoginView({}).render().el);
+			           	 	new app.LoginView({}).render();
 			           	 	$('#errorLogin').hide();
 			           	 	$('#confirmation').text("Your email has been verified.").show();
 			            },
