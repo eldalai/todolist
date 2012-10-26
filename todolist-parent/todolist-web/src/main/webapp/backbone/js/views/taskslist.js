@@ -12,6 +12,7 @@
 	        ], function($,_,Backbone,template,templateItem){
 		
 		context.TasksListView = Backbone.View.extend({
+			el: $('#content'),
 			
 			initialize:function () {
 				this.template = _.template(template);
@@ -22,8 +23,7 @@
 			
 			render:function () {
 				$(this.el).html(this.template());
-				$('#tasklist-content', this.el).html(new context.TasksListItemView().render().el);
-				return this;
+				new context.TasksListItemView({el:$('#tasklist-content', this.el)}).render();
 			},
 			createtask:function(){
 				event.preventDefault(); // Don't let this button submit the form
@@ -35,7 +35,6 @@
 					
 					success:function () {
 						window.location.replace('#newtask');
-						
 					}
 				});
 			}
@@ -55,11 +54,11 @@
 			},
 			
 			render:function () {
-				$(this.el).empty();
+				var self = this;
+				$(self.el).empty();
 				_.each(this.model.models, function (task) {
-					$(this.el).append(new context.TasksItemView({model:task}).render().el);
+					new context.TasksItemView({model:task, el: $(self.el)}).render();
 				}, this);
-				return this;
 			}
 		});
 		
@@ -74,8 +73,7 @@
 			},
 			
 			render:function () {
-				$(this.el).html(this.template(this.model.toJSON()));
-				return this;
+				$(this.el).append(this.template(this.model.toJSON()));
 			}
 			
 		});

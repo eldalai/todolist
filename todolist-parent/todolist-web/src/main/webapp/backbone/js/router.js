@@ -62,7 +62,7 @@ define([
 			},
 			
 			taskslist: function() {
-				$('#content').html(new app.TasksListView().render().el);
+				new app.TasksListView().render();
 			},
 			userregistration: function() {
 				new app.UserRegistrationView().render();
