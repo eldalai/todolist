@@ -16,7 +16,7 @@ require.config({
 			"bootstrap-transition": {deps: ["jquery"]},"bootstrap-alert": {deps: ["jquery"]},
 			"bootstrap-modal": {deps: ["jquery"]},"bootstrap-dropdown": {deps: ["jquery"]},
 			"bootstrap-scrollspy": {deps: ["jquery"]},"bootstrap-tab": {deps: ["jquery"]},
-			"bootstrap-tooltip": {deps: ["jquery"]},"bootstrap-popover": {deps: ["jquery"]},
+			"bootstrap-tooltip": {deps: ["jquery"]},"bootstrap-popover": {deps: ["jquery","bootstrap-tooltip"]},
 			"bootstrap-button": {deps: ["jquery"]},"bootstrap-collapse": {deps: ["jquery"]},
 			"bootstrap-carousel": {deps: ["jquery"]},"bootstrap-typeahead": {deps: ["jquery"]}
 		}
