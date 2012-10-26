@@ -5,7 +5,6 @@
 	        'jquery',
 	        'underscore',
 	        'backbone',
-	        'utils',
 	        'models/user'
 	    ], function($,_,Backbone){
 		

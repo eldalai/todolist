@@ -5,13 +5,13 @@
 	        'jquery',
 	        'underscore',
 	        'backbone',
-	        'utils'
-	        ], function($,_,Backbone){
+	        'text!../../tpl/taskdetail.html'
+	        ], function($,_,Backbone,template){
 		
 		context.TaskDetailView = Backbone.View.extend({
 			
 			initialize:function () {
-				this.template = _.template(context.tpl.get('taskdetail'));
+				this.template = _.template(template);
 			},
 			
 			render:function () {

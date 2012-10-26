@@ -5,14 +5,15 @@
 	        'jquery',
 	        'underscore',
 	        'backbone',
-	        'utils',
+	        'text!../../tpl/reassigntask.html',
+	        'text!../../tpl/reassigntaskitem.html',
 	        'collections/users'
-	        ], function($,_,Backbone){
+	        ], function($,_,Backbone,template,templateItem){
 		
 		context.ReassignTaskView = Backbone.View.extend({
 			
 			initialize:function () {
-				this.template = _.template(context.tpl.get('reassigntask'));
+				this.template = _.template(template);
 			},
 			
 			render:function () {
@@ -52,7 +53,7 @@
 			tagName:"li",
 			
 			initialize:function () {
-				this.template = _.template(context.tpl.get('reassigntaskitem'));
+				this.template = _.template(templateItem);
 				this.model.bind("change", this.render, this);
 				this.model.bind("destroy", this.close, this);
 			},

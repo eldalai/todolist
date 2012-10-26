@@ -5,13 +5,13 @@
 	        'jquery',
 	        'underscore',
 	        'backbone',
-	        'utils'
-	        ], function($,_,Backbone){
+	        'text!../../tpl/header.html'
+	        ], function($,_,Backbone,template){
 		
 		context.HeaderView = Backbone.View.extend({
 			
 			initialize:function () {
-				this.template = _.template(context.tpl.get('header'));
+				this.template = _.template(template);
 				//this.searchResults = new TaskList();
 				//this.searchresultsView = new EmployeeListView({model:this.searchResults, className:'dropdown-menu'});
 			},

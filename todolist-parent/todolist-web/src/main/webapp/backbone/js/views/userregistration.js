@@ -5,15 +5,15 @@
 	        'jquery',
 	        'underscore',
 	        'backbone',
-	        'utils',
+	        'text!../../tpl/userregistration.html',
 	        'models/user'
-	        ], function($,_,Backbone){
+	        ], function($,_,Backbone,template){
 		
 		context.UserRegistrationView = Backbone.View.extend({
 			className:'box',
 			initialize:function () {
 				console.log('Initializing User registration View');
-				this.template = _.template(context.tpl.get('userregistration'));
+				this.template = _.template(template);
 				this.model = new context.User();
 			},
 			

@@ -5,14 +5,14 @@
 	        'jquery',
 	        'underscore',
 	        'backbone',
-	        'utils'
-	        ], function($,_,Backbone){
+	        'text!../../tpl/home.html'
+	        ], function($,_,Backbone, template){
 		
 		context.HomeView = Backbone.View.extend({
 			
 			initialize:function () {
 				console.log('Initializing Home View');
-				this.template = _.template(context.tpl.get('home'));
+				this.template = _.template( template );
 			},
 			
 			events:{

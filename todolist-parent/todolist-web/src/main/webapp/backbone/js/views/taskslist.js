@@ -5,15 +5,16 @@
 	        'jquery',
 	        'underscore',
 	        'backbone',
-	        'utils',
+	        'text!../../tpl/taskslist.html',
+	        'text!../../tpl/taskslistitem.html',
 	        'models/task',
 	        'collections/tasks'
-	        ], function($,_,Backbone){
+	        ], function($,_,Backbone,template,templateItem){
 		
 		context.TasksListView = Backbone.View.extend({
 			
 			initialize:function () {
-				this.template = _.template(context.tpl.get('taskslist'));
+				this.template = _.template(template);
 			},
 			events:{
 				"click #createtask":"createtask"
@@ -67,7 +68,7 @@
 			tagName:"li",
 			
 			initialize:function () {
-				this.template = _.template(context.tpl.get('taskslistitem'));
+				this.template = _.template(templateItem);
 				this.model.bind("change", this.render, this);
 				this.model.bind("destroy", this.close, this);
 			},

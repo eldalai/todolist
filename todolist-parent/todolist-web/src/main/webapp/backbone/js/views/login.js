@@ -5,14 +5,14 @@
 	        'jquery',
 	        'underscore',
 	        'backbone',
-	        'utils'
-	    ], function($,_,Backbone){
+	        'text!../../tpl/login.html'
+	    ], function($,_,Backbone,template){
 		
 		context.LoginView = Backbone.View.extend({
 			
 			initialize:function () {
 				console.log('Initializing Login View');
-				this.template = _.template(context.tpl.get('login'));
+				this.template = _.template(template);
 			},
 			
 			events: {

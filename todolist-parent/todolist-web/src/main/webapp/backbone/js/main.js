@@ -26,7 +26,7 @@
 	});
 	
 	define([
-	        'jquery','underscore','backbone','utils','views/header','views/home','views/login','views/reassigntask',
+	        'jquery','underscore','backbone','views/header','views/home','views/login','views/reassigntask',
 	        'views/userregistration','views/taskslist','views/newtask','views/taskdetail','models/task'
 	        ], function($,_,Backbone){
 		// Tell jQuery to watch for any 401 or 403 errors and handle them appropriately
@@ -156,12 +156,9 @@
 			    }
 			});
 			
-			app.tpl.loadTemplates(['home','header', 'login', 'reassigntask','reassigntaskitem',"taskslist",'taskslistitem',"userregistration",'taskdetail','newtask'],
-					function () {
-				//app = new AppRouter();
-				app.application = new app.AppRouter();
-				Backbone.history.start();
-			});
+			//app = new AppRouter();
+			app.application = new app.AppRouter();
+			Backbone.history.start();
 			
 		});
 		

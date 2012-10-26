@@ -5,9 +5,9 @@
 	        'jquery',
 	        'underscore',
 	        'backbone',
-	        'utils',
+	        'text!../../tpl/newtask.html',
 	        'models/task'
-	        ], function($,_,Backbone){
+	        ], function($,_,Backbone,template){
 		
 		context.NewTaskView = Backbone.View.extend({
 			
@@ -19,7 +19,7 @@
 
 		         console.log('Initializing New Task View');
 
-		         this.template = _.template(context.tpl.get('newtask'));
+		         this.template = _.template(template);
 
 		         this.bind('change', this.save);
 		     },
