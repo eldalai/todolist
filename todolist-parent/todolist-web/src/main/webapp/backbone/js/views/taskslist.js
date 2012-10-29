@@ -25,7 +25,8 @@
 				$(this.el).html(this.template());
 				new context.TasksListItemView({el:$('#tasklist-content', this.el)}).render();
 			},
-			createtask:function(){
+			createtask:function(event){
+				event.preventDefault();
 				window.location.replace('#newtask');
 			}
 		});
