@@ -6,6 +6,8 @@ define([
         'models/task'
         ], function($,_,Backbone){
 	
+		var instances = app.instances || ( app.instances = {} );
+	
 		app.AppRouter = Backbone.Router.extend({
 			routes:{
 				"" : "login",
@@ -32,21 +34,25 @@ define([
 			
 			home:function () {
 				// Since the home view never changes, we instantiate it and render it only once
-				if (!this.homeView) {
-					this.homeView = new app.HomeView();
+				if ( !_.isObject( instances.homeView ) ) {
+					instances.homeView = new app.HomeView();
 				}
-				this.homeView.render();
+				instances.homeView.render();
 			},
 			
 			contact:function () {
-				if (!this.contactView) {
-					this.contactView = new app.ContactView();
+				if ( !_.isObject( instances.contactView ) ) {
+					instances.contactView = new app.ContactView();
 				}
-				this.contactView.render();
+				instances.contactView.render();
 			},
 			
 			login: function() {
-				new app.LoginView().render();
+				
+				if ( !_.isObject( instances.loginView ) ) {
+					instances.loginView = new app.LoginView();
+				}
+				instances.loginView.render();
 			},
 			
 			reassigntask: function(id) {
@@ -55,17 +61,27 @@ define([
 					success:function (data) {
 						// Note that we could also 'recycle' the same instance of EmployeeFullView
 						// instead of creating new instances
-						new app.ReassignTaskView({model:data}).render();
+						if ( !_.isObject( instances.reassignTaskView ) ) {
+							instances.reassignTaskView = new app.ReassignTaskView();
+						}
+						instances.reassignTaskView.model = data;
+						instances.reassignTaskView.render();
 					}
 				});
 				
 			},
 			
 			taskslist: function() {
-				new app.TasksListView().render();
+				if ( !_.isObject( instances.tasksListView ) ) {
+					instances.tasksListView = new app.TasksListView();
+				}
+				instances.tasksListView.render();
 			},
 			userregistration: function() {
-				new app.UserRegistrationView().render();
+				if ( !_.isObject( instances.userRegistrationView ) ) {
+					instances.userRegistrationView = new app.UserRegistrationView();
+				}
+				instances.userRegistrationView.render();
 			},
 			taskdetail: function(id) {
 		     	var task = new app.Task({id:id});
@@ -73,7 +89,11 @@ define([
 		             success:function (data) {
 		                 // Note that we could also 'recycle' the same instance of EmployeeFullView
 		                 // instead of creating new instances
-		             	new app.TaskDetailView({model:data}).render();
+		             	if ( !_.isObject( instances.taskDetailView ) ) {
+							instances.taskDetailView = new app.TaskDetailView();
+						}
+		             	instances.taskDetailView.model = data;
+						instances.taskDetailView.render();
 		             }
 		         });
 				         
@@ -84,33 +104,44 @@ define([
 		             success:function (data) {
 		                 // Note that we could also 'recycle' the same instance of EmployeeFullView
 		                 // instead of creating new instances
-		             	new app.NewTaskView({model:data}).render();
+		             	if ( !_.isObject( instances.newTaskView ) ) {
+							instances.newTaskView = new app.NewTaskView();
+						}
+		             	instances.newTaskView.model = data;
+						instances.newTaskView.render();
+		             },
+		             error:function (data) {
+		            	 console.log( 'error', data );
 		             }
 		         });
 			         
 			},
 			newtask: function(){
-				new app.NewTaskView().render();
+				if ( !_.isObject( instances.newTaskView ) ) {
+					instances.newTaskView = new app.NewTaskView();
+				}
+				instances.newTaskView.model = new app.Task();
+				instances.newTaskView.render();
 			},
-			 confirm: function(id, tokenid){
-		    	 var url = '../rest/session';
+			confirm: function(id, tokenid){
+				var url = '../rest/session';
 		         console.log('checking email confirmation... ');
 		      	 $.ajax({
-			            url:url,
-			            type:'PUT',
-			            dataType:"json",
-			            data: { email: id, token: tokenid },
-			            success:function (data) {
-			                console.log(["Login request details: ", data]);
-			           	 	new app.LoginView({}).render();
-			           	 	$('#errorLogin').hide();
-			           	 	$('#confirmation').text("Your email has been verified.").show();
-			            },
-			            error: function(jqXHR, textStatus, errorThrown) {
-			            	$('#errorLogin').text("Error").show();
-			            	$('#confirmation').text("Your email has been verified.").hide();
-			            }
-			        });
+		            url:url,
+		            type:'PUT',
+		            dataType:"json",
+		            data: { email: id, token: tokenid },
+		            success:function (data) {
+		                console.log(["Login request details: ", data]);
+		           	 	new app.LoginView({}).render();
+		           	 	$('#errorLogin').hide();
+		           	 	$('#confirmation').text("Your email has been verified.").show();
+		            },
+		            error: function(jqXHR, textStatus, errorThrown) {
+		            	$('#errorLogin').text("Error").show();
+		            	$('#confirmation').text("Your email has been verified.").hide();
+		            }
+		        });
 		    }
 		});
 		
