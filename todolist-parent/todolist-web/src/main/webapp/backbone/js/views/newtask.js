@@ -44,7 +44,7 @@
 
 				//var url = '../rest/tasks';   
 
-				if($('#inputTitle').val()!=''){
+				if($('#inputTitle').val().length > 0){
 					if(this.model.id == null){
 						var task = new context.Task({title: $('#inputTitle').val(), taskStatus : parseInt($("#status").val()), taskType : parseInt($("#type").val())});
 					}else{
@@ -54,6 +54,8 @@
 					task.save({
 						success:function (data) {
 							console.log(["New Task: ", data]);
+							//add the model to the collection
+							context.instances.TasksListView.model.add( task );
 						}	
 					});	
 					window.location.replace('#taskslist');
