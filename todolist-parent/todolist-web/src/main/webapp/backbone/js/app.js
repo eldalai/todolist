@@ -2,10 +2,8 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'router', // Request router.js
-  'bootstrap-transition','bootstrap-alert','bootstrap-modal','bootstrap-dropdown','bootstrap-scrollspy',
-  'bootstrap-tab','bootstrap-tooltip','bootstrap-popover','bootstrap-button','bootstrap-collapse',
-  'bootstrap-carousel','bootstrap-typeahead'
+  'router', 
+  'bootstrap'
 ], function($, _, Backbone, Router){
 	
 // Tell jQuery to watch for any 401 or 403 errors and handle them appropriately
