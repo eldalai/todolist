@@ -133,7 +133,11 @@ define([
 		            data: { email: id, token: tokenid },
 		            success:function (data) {
 		                console.log(["Login request details: ", data]);
-		           	 	new app.LoginView({}).render();
+		                if ( !_.isObject( instances.loginView ) ) {
+							instances.loginView = new app.LoginView();
+						}
+		                instances.loginView.model = null;
+						instances.loginView.render();
 		           	 	$('#errorLogin').hide();
 		           	 	$('#confirmation').text("Your email has been verified.").show();
 		            },
