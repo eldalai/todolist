@@ -26,17 +26,7 @@
 				new context.TasksListItemView({el:$('#tasklist-content', this.el)}).render();
 			},
 			createtask:function(){
-				event.preventDefault(); // Don't let this button submit the form
-				var url = 'tpl/newtask.html';
-				$.ajax({
-					
-					url:url,
-					type:'POST',
-					
-					success:function () {
-						window.location.replace('#newtask');
-					}
-				});
+				window.location.replace('#newtask');
 			}
 		});
 		
