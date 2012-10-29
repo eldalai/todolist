@@ -4,7 +4,7 @@ require.config({
 		baseUrl: "js/",
 		paths: {
 			'jquery': '../lib/jquery-1.7.1.min', 'underscore': '../lib/underscore-min', 
-			'backbone': '../lib/backbone-min','bootstrap':'../lib/bootstrap.min.js'
+			'backbone': '../lib/backbone-min','bootstrap':'../lib/bootstrap.min'
 		},
 		shim: {
 			"underscore": {exports: '_'},"jquery": {exports: '$'},
