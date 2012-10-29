@@ -1,12 +1,12 @@
 var app = app || {};
 
 define([
-        'jquery','underscore','backbone','views/header','views/home','views/login','views/reassigntask',
+        'jquery','underscore','backbone','utils','views/header','views/home','views/login','views/reassigntask',
         'views/userregistration','views/taskslist','views/newtask','views/taskdetail','views/contact',
         'models/task'
         ], function($,_,Backbone){
 	
-		var instances = app.instances || ( app.instances = {} );
+		var utils = app.utils || ( app.utils = {} );
 	
 		app.AppRouter = Backbone.Router.extend({
 			routes:{
@@ -23,8 +23,8 @@ define([
 			},
 			
 			initialize:function () {
-				this.headerView = new app.HeaderView();
-				this.headerView.render();
+				
+				utils.renderView( 'HeaderView' );
 				
 				// Close the search dropdown on click anywhere in the UI
 				$('body').click(function () {
@@ -34,25 +34,15 @@ define([
 			
 			home:function () {
 				// Since the home view never changes, we instantiate it and render it only once
-				if ( !_.isObject( instances.homeView ) ) {
-					instances.homeView = new app.HomeView();
-				}
-				instances.homeView.render();
+				utils.renderView( 'HomeView' );
 			},
 			
 			contact:function () {
-				if ( !_.isObject( instances.contactView ) ) {
-					instances.contactView = new app.ContactView();
-				}
-				instances.contactView.render();
+				utils.renderView( 'ContactView' );
 			},
 			
 			login: function() {
-				
-				if ( !_.isObject( instances.loginView ) ) {
-					instances.loginView = new app.LoginView();
-				}
-				instances.loginView.render();
+				utils.renderView( 'LoginView' );
 			},
 			
 			reassigntask: function(id) {
@@ -61,27 +51,17 @@ define([
 					success:function (data) {
 						// Note that we could also 'recycle' the same instance of EmployeeFullView
 						// instead of creating new instances
-						if ( !_.isObject( instances.reassignTaskView ) ) {
-							instances.reassignTaskView = new app.ReassignTaskView();
-						}
-						instances.reassignTaskView.model = data;
-						instances.reassignTaskView.render();
+						utils.renderView( 'ReassignTaskView', data );
 					}
 				});
 				
 			},
 			
 			taskslist: function() {
-				if ( !_.isObject( instances.tasksListView ) ) {
-					instances.tasksListView = new app.TasksListView();
-				}
-				instances.tasksListView.render();
+				utils.renderView( 'TasksListView');
 			},
 			userregistration: function() {
-				if ( !_.isObject( instances.userRegistrationView ) ) {
-					instances.userRegistrationView = new app.UserRegistrationView();
-				}
-				instances.userRegistrationView.render();
+				utils.renderView( 'UserRegistrationView', new app.User());
 			},
 			taskdetail: function(id) {
 		     	var task = new app.Task({id:id});
@@ -89,11 +69,7 @@ define([
 		             success:function (data) {
 		                 // Note that we could also 'recycle' the same instance of EmployeeFullView
 		                 // instead of creating new instances
-		             	if ( !_.isObject( instances.taskDetailView ) ) {
-							instances.taskDetailView = new app.TaskDetailView();
-						}
-		             	instances.taskDetailView.model = data;
-						instances.taskDetailView.render();
+		             	utils.renderView( 'TaskDetailView', data);
 		             }
 		         });
 				         
@@ -104,11 +80,7 @@ define([
 		             success:function (data) {
 		                 // Note that we could also 'recycle' the same instance of EmployeeFullView
 		                 // instead of creating new instances
-		             	if ( !_.isObject( instances.newTaskView ) ) {
-							instances.newTaskView = new app.NewTaskView();
-						}
-		             	instances.newTaskView.model = data;
-						instances.newTaskView.render();
+		             	utils.renderView( 'NewTaskView', data);
 		             },
 		             error:function (data) {
 		            	 console.log( 'error', data );
@@ -117,11 +89,7 @@ define([
 			         
 			},
 			newtask: function(){
-				if ( !_.isObject( instances.newTaskView ) ) {
-					instances.newTaskView = new app.NewTaskView();
-				}
-				instances.newTaskView.model = new app.Task();
-				instances.newTaskView.render();
+				utils.renderView( 'NewTaskView', new app.Task());
 			},
 			confirm: function(id, tokenid){
 				var url = '../rest/session';
@@ -133,11 +101,7 @@ define([
 		            data: { email: id, token: tokenid },
 		            success:function (data) {
 		                console.log(["Login request details: ", data]);
-		                if ( !_.isObject( instances.loginView ) ) {
-							instances.loginView = new app.LoginView();
-						}
-		                instances.loginView.model = null;
-						instances.loginView.render();
+		                utils.renderView( 'LoginView', data);
 		           	 	$('#errorLogin').hide();
 		           	 	$('#confirmation').text("Your email has been verified.").show();
 		            },
