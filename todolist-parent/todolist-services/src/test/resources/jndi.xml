@@ -24,8 +24,8 @@
                 <entry key="java:comp/env/db/type" value="MYSQL" />
                 <entry key="java:comp/env/db/jdbcDriver" value="com.mysql.jdbc.Driver" />
     		    <entry key="java:comp/env/db/url" value="jdbc:mysql://localhost:3306/todolist"/>
-                <entry key="java:comp/env/db/user" value="root"/>
-                <entry key="java:comp/env/db/password" value="root"/>
+                <entry key="java:comp/env/db/user" value="todolist"/>
+                <entry key="java:comp/env/db/password" value="todo"/>
                 <entry key="java:comp/env/db/showSql" value="false"/>
 
                 <entry key="java:comp/env/mail/serverUrl" value="localhost"/>
