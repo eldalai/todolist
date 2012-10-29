@@ -13,6 +13,12 @@
 			
 			initialize:function () {
 				this.template = _.template(template);
+				
+				// Close the search dropdown on click anywhere in the UI
+				$('body').click(function () {
+					$('.dropdown').removeClass("open");
+				});
+				
 				//this.searchResults = new TaskList();
 				//this.searchresultsView = new EmployeeListView({model:this.searchResults, className:'dropdown-menu'});
 			},
