@@ -46,9 +46,9 @@
 
 	<bean id="jpaVendor"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-		<property name="database">
+		 <property name="databasePlatform"> 
 			<bean class="org.springframework.jndi.JndiObjectFactoryBean">
-				<property name="jndiName" value="java:comp/env/db/type" />
+				<property name="jndiName" value="java:comp/env/db/hbmDialect" />
 			</bean>
 		</property>
 		<property name="showSql">
@@ -58,6 +58,26 @@
 		</property>
 		<property name="generateDdl" value="true" />
 	</bean>
+	
+	<bean name="databaseType" class="java.lang.String">
+		<constructor-arg>
+			<bean class="org.springframework.jndi.JndiObjectFactoryBean">
+				<property name="jndiName" value="java:comp/env/db/type" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	
+	<bean class="java.net.URI" id="dbUrl">
+		<constructor-arg>
+			<bean class="org.springframework.jndi.JndiObjectFactoryBean">
+				<property name="jndiName" value="java:comp/env/db/url" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<bean name="databaseUrl" class="java.lang.String">
+		<constructor-arg value="#{ 'jdbc:'+ @databaseType +'://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }" />
+	</bean>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -66,21 +86,9 @@
 				<property name="jndiName" value="java:comp/env/db/jdbcDriver" />
 			</bean>
 		</property>
-		<property name="url">
-			<bean class="org.springframework.jndi.JndiObjectFactoryBean">
-				<property name="jndiName" value="java:comp/env/db/url" />
-			</bean>
-		</property>
-		<property name="username">  
-			<bean class="org.springframework.jndi.JndiObjectFactoryBean">
-				<property name="jndiName" value="java:comp/env/db/user" />
-			</bean>
-		</property>
-		<property name="password">  
-			<bean class="org.springframework.jndi.JndiObjectFactoryBean">
-				<property name="jndiName" value="java:comp/env/db/password" />
-			</bean>
-		</property>
+		<property name="url" value="#{ 'jdbc:'+ @databaseType +'://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }" />
+		<property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }" />
+		<property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }" />
 	</bean>
 
 	<bean

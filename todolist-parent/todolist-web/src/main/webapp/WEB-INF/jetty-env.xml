@@ -2,50 +2,83 @@
 <!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN"
 "http://jetty.mortbay.org/configure.dtd">
 
-<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
 
-	<New id="myapp" class="org.mortbay.jetty.plus.naming.EnvEntry">
+	<New id="myapp" class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>todolist/url</Arg>
-		<Arg type="java.lang.String">http://localhost:9090/todolist</Arg>
+		<Arg type="java.lang.String">http://gltodolist.herokuapp.com</Arg>
 	</New>
 	
-	<New id="dbhbmDialect" class="org.mortbay.jetty.plus.naming.EnvEntry">
+	<New id="dbhbmDialect" class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>db/hbmDialect</Arg>
-		<Arg type="java.lang.String">org.hibernate.dialect.MySQL5InnoDBDialect</Arg>
+		<Arg type="java.lang.String">org.hibernate.dialect.PostgreSQLDialect</Arg>
 	</New>
 	
-	<New id="dbshowql" class="org.mortbay.jetty.plus.naming.EnvEntry">
+	<New id="dbshowql" class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>db/showSql</Arg>
 		<Arg type="java.lang.Boolean">false</Arg>
 	</New>
 	
 	
 	
-	<New id="dbtype" class="org.mortbay.jetty.plus.naming.EnvEntry">
+	<New id="dbtype" class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>db/type</Arg>
-		<Arg type="java.lang.String">HSQL</Arg>
+		<Arg type="java.lang.String">postgresql</Arg>
 	</New>
 
-	<New id="dbdriver" class="org.mortbay.jetty.plus.naming.EnvEntry">
+	<New id="dbdriver" class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>db/jdbcDriver</Arg>
-		<Arg type="java.lang.String">org.hsqldb.jdbcDriver</Arg>
+		<Arg type="java.lang.String">org.postgresql.Driver</Arg>
 	</New>
 
-	<New id="dburl" class="org.mortbay.jetty.plus.naming.EnvEntry">
+	<New id="dburl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>db/url</Arg>
-		<Arg type="java.lang.String">jdbc:hsqldb:mem:todolist</Arg>
+		<Arg type="java.lang.String">
+			<Call class="java.lang.System" name="getProperty">
+				<Arg>database_url</Arg>
+			</Call>
+		</Arg>
+		<!-- 
+		HSQL: jdbc:hsqldb:mem:todolist 
+		Postgres: postgres://todolist:todolist@eze3-dnn-00513:5432/todolist
+		-->
 	</New>
 	
-	<New id="dbuser" class="org.mortbay.jetty.plus.naming.EnvEntry">
+	<New id="dbuser" class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>db/user</Arg>
 		<Arg type="java.lang.String">sa</Arg>
 	</New>
 	
-	<New id="dbpass" class="org.mortbay.jetty.plus.naming.EnvEntry">
+	<New id="dbpass" class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>db/password</Arg>
 		<Arg type="java.lang.String">
 			<New class="java.lang.String"/>
 		</Arg>
+	</New>
+	
+	<New id="mailEmailFrom" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>mail/emailFrom</Arg>
+		<Arg type="java.lang.String">noreply@ourdoughmain.com</Arg>
+	</New>
+
+	<New id="mailServerUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>mail/serverUrl</Arg>
+		<Arg type="java.lang.String">smtp.gmail.com</Arg>
+	</New>
+
+	<New id="mailServerPort" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>mail/serverPort</Arg>
+		<Arg type="java.lang.String">587</Arg>
+	</New>
+
+	<New id="mailServerUser" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>mail/serverUser</Arg>
+		<Arg type="java.lang.String">cursosgloballogic@gmail.com</Arg>
+	</New>
+
+	<New id="mailServerPassword" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>mail/serverPassword</Arg>
+		<Arg type="java.lang.String">cursosdegloballogic3</Arg>
 	</New>
 
 </Configure>
