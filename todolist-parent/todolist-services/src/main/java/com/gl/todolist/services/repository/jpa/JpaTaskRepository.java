@@ -36,7 +36,7 @@ public class JpaTaskRepository implements ITaskRepository{
 	
 	@SuppressWarnings("unchecked")
 	public List<Task> findTasks(User user){
-		Query q = em.createQuery("FROM Task where user = :user");
+		Query q = em.createQuery("FROM tasks where user = :user");
         q.setParameter("user", user);
 		List<Task> resultList = q.getResultList();
 		return resultList;

@@ -36,13 +36,13 @@ public class JpaUserRepository implements IUserRepository{
 	
 	@SuppressWarnings("unchecked")
 	public List<User> findUsers(){
-		List<User> resultList = em.createQuery("FROM User").getResultList();
+		List<User> resultList = em.createQuery("FROM users").getResultList();
 		return resultList;
 	}
 	
 	public User validateNameUser(User user){
 		try{
-			Query q = em.createQuery("SELECT user FROM User user WHERE user.name = :nameUser");
+			Query q = em.createQuery("SELECT user FROM users user WHERE user.name = :nameUser");
 	        q.setParameter("nameUser", user.getName());
 	        return (User) q.getSingleResult();
 	  	}catch(NoResultException ex){
@@ -53,7 +53,7 @@ public class JpaUserRepository implements IUserRepository{
 	@Override
 	public User find(String email, String password) throws EntityNotFoundException{
 		try{
-			Query q = em.createQuery("SELECT user FROM User user WHERE user.name = :nameUser and user.password = :password");
+			Query q = em.createQuery("SELECT user FROM users user WHERE user.name = :nameUser and user.password = :password");
 	        q.setParameter("nameUser", email);
 	        q.setParameter("password", password);
 	        User user = (User)q.getSingleResult();
@@ -67,7 +67,7 @@ public class JpaUserRepository implements IUserRepository{
 	
 	public User userByEmail(String email) throws EntityNotFoundException{
 		try{
-			Query q = em.createQuery("SELECT user FROM User user WHERE user.name =:nameUser");
+			Query q = em.createQuery("SELECT user FROM users user WHERE user.name =:nameUser");
 			q.setParameter("nameUser", email);
 			User user = (User)q.getSingleResult();
 			if(user == null)

@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-@Entity
+@Entity(name="tasks")
 public class Task implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
