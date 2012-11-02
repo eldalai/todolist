@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -17,7 +18,7 @@ import javax.validation.constraints.Size;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 
-@Entity
+@Entity(name="users")
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -32,6 +33,7 @@ public class User implements Serializable{
 	private String password;
 	@Valid
 	@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinColumn(name="user_id")
 	private List<Task> task = new ArrayList<Task>();
 	private boolean stateUser;
 	private String token;
