@@ -10,7 +10,7 @@
   <artifactId>todolist-web</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>todolist web</name>
+  <name>todolist-web</name>
   
   <url>http://maven.apache.org</url>
   
