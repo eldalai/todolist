@@ -34,6 +34,21 @@
 			newaccount:function(event) {
 				event.preventDefault(); // Don't let this button submit the form
 				$('.alert-error').hide(); // Hide any errors on a new submit
+				if( $('#inputEmail').val() == '' )
+				{
+					$('.alert-error').text('Email obligatorio').show();
+					return;
+				}	
+				if( $('#inputPassword').val() == '' )
+				{
+					$('.alert-error').text('Password obligatorio').show();
+					return;
+				}	
+				if( $('#inputPassword').val() != $('#inputPasswordConfirmation').val() )
+				{
+					$('.alert-error').text('Password confirmation error').show();
+					return;
+				}	
 				var url = '../rest/users';       
 				this.model.set({name: $('#inputEmail').val(), password : $('#inputPassword').val()});
 				$.ajax({

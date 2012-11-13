@@ -6,10 +6,12 @@
 </head>
 
 <body>
-<p><B>Hello: </B> ${user.name}
+<p><B>Hola: </B> ${user.name}
 <br>
+Este es un mail de confirmación de su email. Por favor vaya al siguiente link para comenzar a operar con su usuario.
 <br>
-<a href="$url#token/$user.name/$user.token">link</a>
+<a href="$url#token/$user.name/$user.token">$url#token/$user.name/$user.token</a> <br>
+Gracias <br>
 
 </body>
 </html>
