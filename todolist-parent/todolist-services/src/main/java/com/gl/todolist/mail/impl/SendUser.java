@@ -41,7 +41,7 @@ public class SendUser extends VelocityEmailSender{
 	          message.setSubject(msg.getSubject());
 	          hTemplateVariables.put(Constants.URL, appUrl);
 	          String body = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, Constants.TEMPLATE_USER, hTemplateVariables);
-	          logger.debug( "enviando confirmación de registración: \n" + body );
+	          logger.debug( "enviando confirmacion de registracion: \n" + body );
 	          message.setText(body, true);
 	       }
 	   };
