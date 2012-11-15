@@ -11,7 +11,7 @@
 	
 	<New id="dbhbmDialect" class="org.mortbay.jetty.plus.naming.EnvEntry">
 		<Arg>db/hbmDialect</Arg>
-		<Arg type="java.lang.String">org.hibernate.dialect.MySQL5InnoDBDialect</Arg>
+		<Arg type="java.lang.String">org.hibernate.dialect.HSQLDialect</Arg>
 	</New>
 	
 	<New id="dbshowql" class="org.mortbay.jetty.plus.naming.EnvEntry">
@@ -21,7 +21,7 @@
 	
 	<New id="dbtype" class="org.mortbay.jetty.plus.naming.EnvEntry">
 		<Arg>db/type</Arg>
-		<Arg type="java.lang.String">HSQL</Arg>
+		<Arg type="java.lang.String">hsqldb</Arg>
 	</New>
 
 	<New id="dbdriver" class="org.mortbay.jetty.plus.naming.EnvEntry">
@@ -31,7 +31,7 @@
 
 	<New id="dburl" class="org.mortbay.jetty.plus.naming.EnvEntry">
 		<Arg>db/url</Arg>
-		<Arg type="java.lang.String">jdbc:hsqldb:mem:todolist</Arg>
+		<Arg type="java.lang.String">hsqldb://sa:blank@mem:0/todolist</Arg>
 	</New>
 	
 	<New id="dbuser" class="org.mortbay.jetty.plus.naming.EnvEntry">
