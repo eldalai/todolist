@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gl.todolist.domain.Task;
 import com.gl.todolist.domain.User;
+import com.gl.todolist.repository.ITaskRepository;
 import com.gl.todolist.services.ITaskServices;
-import com.gl.todolist.services.repository.ITaskRepository;
 
 @Service
 @Transactional

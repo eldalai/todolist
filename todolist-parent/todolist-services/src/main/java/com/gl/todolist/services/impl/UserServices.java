@@ -15,11 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gl.todolist.domain.User;
 import com.gl.todolist.mail.impl.SendUser;
+import com.gl.todolist.repository.IUserRepository;
 import com.gl.todolist.services.IUserServices;
 import com.gl.todolist.services.IUtilServices;
 import com.gl.todolist.services.exceptions.MessagesExceptions;
 import com.gl.todolist.services.exceptions.UserException;
-import com.gl.todolist.services.repository.IUserRepository;
 
 @Service
 @Transactional
