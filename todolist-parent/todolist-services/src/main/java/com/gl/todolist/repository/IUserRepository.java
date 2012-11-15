@@ -1,4 +1,4 @@
-package com.gl.todolist.services.repository;
+package com.gl.todolist.repository;
 
 import java.util.List;
 
