@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN"
+"http://jetty.mortbay.org/configure.dtd">
+
+<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+
+	<New id="myapp" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>todolist/url</Arg>
+		<Arg type="java.lang.String">http://localhost:9090/todolist</Arg>
+	</New>
+	
+	<New id="dbhbmDialect" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>db/hbmDialect</Arg>
+		<Arg type="java.lang.String">org.hibernate.dialect.MySQL5InnoDBDialect</Arg>
+	</New>
+	
+	<New id="dbshowql" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>db/showSql</Arg>
+		<Arg type="java.lang.Boolean">false</Arg>
+	</New>
+	
+	<New id="dbtype" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>db/type</Arg>
+		<Arg type="java.lang.String">HSQL</Arg>
+	</New>
+
+	<New id="dbdriver" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>db/jdbcDriver</Arg>
+		<Arg type="java.lang.String">org.hsqldb.jdbcDriver</Arg>
+	</New>
+
+	<New id="dburl" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>db/url</Arg>
+		<Arg type="java.lang.String">jdbc:hsqldb:mem:todolist</Arg>
+	</New>
+	
+	<New id="dbuser" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>db/user</Arg>
+		<Arg type="java.lang.String">sa</Arg>
+	</New>
+	
+	<New id="dbpass" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>db/password</Arg>
+		<Arg type="java.lang.String">
+			<New class="java.lang.String"/>
+		</Arg>
+	</New>
+	
+	<New id="mailserverUrl" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>mail/serverUrl</Arg>
+		<Arg type="java.lang.String">localhost</Arg>
+	</New>
+	
+	<New id="mailserverPort" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>mail/serverPort</Arg>
+		<Arg type="java.lang.String">62525</Arg>
+	</New>
+	
+	<New id="mailserverUser" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>mail/serverUser</Arg>
+		<Arg type="java.lang.String">user</Arg>
+	</New>
+	
+	<New id="mailserverPassword" class="org.mortbay.jetty.plus.naming.EnvEntry">
+		<Arg>mail/serverPassword</Arg>
+		<Arg type="java.lang.String">pass</Arg>
+	</New>
+	
+</Configure>
+

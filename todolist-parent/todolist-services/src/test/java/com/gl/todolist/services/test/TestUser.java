@@ -26,7 +26,7 @@ public class TestUser extends TestBase{
 		tasks.add(task2);
 		tasks.add(task3);
 		
-		User user  = getUser("Juan.Perez", "123456", tasks);
+		User user  = getUser("Juan.Perez@gmail.com", "123456", tasks);
 		
 		try {
 			User user2 = iUserServices.saveUser(user);
@@ -47,7 +47,7 @@ public class TestUser extends TestBase{
 		tasks2.add(task5);
 		tasks2.add(task6);
 		
-		User user3  = getUser("Juan.Perez", "8911001", tasks2);
+		User user3  = getUser("Juan.Perez@gmail.com", "8911001", tasks2);
 		
 		try {
 			User user4 = iUserServices.saveUser(user3);

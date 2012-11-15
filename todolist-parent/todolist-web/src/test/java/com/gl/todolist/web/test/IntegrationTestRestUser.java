@@ -19,9 +19,9 @@ import com.gl.todolist.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)  
 @ContextConfiguration(locations={"classpath:integration-test-context.xml"}) 
-public class TestRestUser extends TestCase {
+public class IntegrationTestRestUser extends TestCase {
 
-	private static final String LOCAL_URL = "http://localhost:9090/todolist-web/";
+	private static final String LOCAL_URL = "http://localhost:9090/todolist-web/rest/";
 	private static final String LIST_USERS = LOCAL_URL + "users";
 
 
@@ -32,7 +32,7 @@ public class TestRestUser extends TestCase {
 	@Test
 	public void testCreateUser(){
 		User objUser = new User();
-		objUser.setName("juan.gonzales");
+		objUser.setName("arm.rosario@gmail.com");
 		objUser.setPassword("124567");
 		try{
 			User user = restTemplate.postForObject(LIST_USERS, objUser, User.class, new Object[]{});

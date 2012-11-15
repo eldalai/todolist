@@ -9,8 +9,10 @@
     http://gate.ac.uk/ns/spring.xsd 
     http://www.springframework.org/schema/aop  
   	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-	
+
 	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
 	</bean>
+
+	<bean id="fakeMailServer" class="com.gl.todolist.web.controllers.impl.FakeMailServer" />
 
 </beans>
