@@ -84,7 +84,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<encoding>Cp1252</encoding>
+<!-- 					<encoding>Cp1252</encoding> -->
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 

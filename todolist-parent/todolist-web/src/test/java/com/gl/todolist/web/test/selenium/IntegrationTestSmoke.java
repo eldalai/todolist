@@ -31,8 +31,8 @@ import com.sun.org.apache.commons.logging.*;
 @ContextConfiguration(locations={"classpath:integration-test-context.xml"}) 
 public class IntegrationTestSmoke {
 
-	private WebDriver driver;
-//	private HtmlUnitDriver driver;
+//	private WebDriver driver;
+	private HtmlUnitDriver driver;
 	
 	@Autowired 
 	FakeMailServer fakeMailServer;
@@ -41,15 +41,14 @@ public class IntegrationTestSmoke {
 	
 	@Before
 	public void beforeMethod(){
-		driver = new FirefoxDriver();
-//	 driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_3_6);
+		//firefox
+//	    driver = new FirefoxDriver();
 		
-		
-//		driver = new HtmlUnitDriver();
-//		driver.setJavascriptEnabled(true); 
+		//HtmlUnit
+		driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_3_6);		
+		driver.setJavascriptEnabled(true); 
 
 		driver.navigate().to(appUrl+"/backbone/index.html");
-//		driver.navigate().to("https://www.google.com.ar");
 	}
  
 	@Test
@@ -61,12 +60,13 @@ public class IntegrationTestSmoke {
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("newaccount")));
 		driver.findElement(By.id("inputEmail")).sendKeys("octavio_ar21@hotmail.com");
 		driver.findElement(By.id("inputPassword")).sendKeys("123");
+ 		driver.findElement(By.id("inputPasswordConfirmation")).sendKeys("123");
 		driver.findElement(By.id("newaccount")).click();
 		wait.until(ExpectedConditions.textToBePresentInElement(By.id("confirmation"), "Please confirm the registration by email that we sent you"));
 		
 		Thread.sleep(10000);
 		fakeMailServer.getServer().stop();
-		assertTrue("Envio de mail de registración",fakeMailServer.getServer().getReceivedEmailSize()-1 == 1);
+		assertTrue("Envio de mail de registración",fakeMailServer.getServer().getReceivedEmailSize() == 2);
 	
 		//mock mail
 		Iterator emailIter =  fakeMailServer.getServer().getReceivedEmail();
@@ -74,19 +74,17 @@ public class IntegrationTestSmoke {
         SmtpMessage email =  (SmtpMessage) emailIter.next();
         
         int x = email.getBody().indexOf("#token");
-        int y = email.getBody().indexOf(">link</a>")-1;
+        int y = email.getBody().indexOf(">http://")-1;
         
-        String tokenUrl = email.getBody().substring(x,y);
+        String tokenUrl = email.getBody().substring(x,y).replace("=", "");
         
-        String uno=driver.getCurrentUrl();
-        System.out.println("uno wiii: "+uno);
 		driver.navigate().to(appUrl+"/backbone/index.html"+tokenUrl);
+		
 		driver.get(appUrl+"/backbone/index.html"+tokenUrl);
-        String dos=driver.getCurrentUrl();
-        System.out.println("dos wiii: "+dos);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("loginButton")));
 		driver.findElement(By.id("inputEmail")).sendKeys("octavio_ar21@hotmail.com");
 		driver.findElement(By.id("inputPassword")).sendKeys("123");
+		
 		driver.findElement(By.id("loginButton")).click();
 		
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("createtask")));
