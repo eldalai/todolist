@@ -1,4 +1,4 @@
-package com.gl.todolist.services.repository.jpa;
+package com.gl.todolist.repository.jpa;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.gl.todolist.domain.User;
-import com.gl.todolist.services.repository.IUserRepository;
+import com.gl.todolist.repository.IUserRepository;
 
 @Repository
 public class JpaUserRepository implements IUserRepository{

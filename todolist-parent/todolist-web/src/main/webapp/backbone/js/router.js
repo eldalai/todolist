@@ -88,14 +88,14 @@ define([
 			},
 			confirm: function(id, tokenid){
 				var url = '../rest/session';
-		         console.log('checking email confirmation... ');
+//		         console.log('checking email confirmation... ');
 		      	 $.ajax({
 		            url:url,
 		            type:'PUT',
 		            dataType:"json",
 		            data: { email: id, token: tokenid },
 		            success:function (data) {
-		                console.log(["Login request details: ", data]);
+//		                console.log(["Login request details: ", data]);
 		                utils.renderView( 'LoginView', data);
 		           	 	$('#errorLogin').hide();
 		           	 	$('#confirmation').text("Your email has been verified.").show();

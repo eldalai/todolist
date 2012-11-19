@@ -37,7 +37,7 @@
 			className:'nav nav-list',
 			
 			initialize:function () {
-				console.log('Initializing Tasks List View');
+//				console.log('Initializing Tasks List View');
 				this.model = new context.TaskList();
 				this.model.bind("all", this.render, this);
 				this.model.fetch();

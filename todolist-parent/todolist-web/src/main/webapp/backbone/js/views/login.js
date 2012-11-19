@@ -13,7 +13,7 @@
 			el: $('#content'),
 			
 			initialize:function () {
-				console.log('Initializing Login View');
+//				console.log('Initializing Login View');
 				this.template = _.template(template);
 			},
 			
@@ -54,7 +54,7 @@
 					dataType:"json",
 					data: { email: username, password: password },
 					success:function (data) {
-						console.log(["Login request details: ", data]);
+//						console.log(["Login request details: ", data]);
 						
 						if(data.error) {  // If there is an error, show the error messages
 							$('.alert-error').text(data.error.text).show();

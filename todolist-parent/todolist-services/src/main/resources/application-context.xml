@@ -76,7 +76,7 @@
 	</bean>
 
 	<bean name="databaseUrl" class="java.lang.String">
-		<constructor-arg value="#{ 'jdbc:'+ @databaseType +'://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }" />
+		<constructor-arg value="#{ 'jdbc:'+ @databaseType +':' + @dbUrl.getHost() + ':' + (  @dbUrl.getPort() != 0 ? @dbUrl.getPort() : '' )  + @dbUrl.getPath() }" />
 	</bean>
 
 	<bean id="dataSource"
@@ -86,9 +86,9 @@
 				<property name="jndiName" value="java:comp/env/db/jdbcDriver" />
 			</bean>
 		</property>
-		<property name="url" value="#{ 'jdbc:'+ @databaseType +'://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }" />
+		<property name="url" value="#{ 'jdbc:'+ @databaseType +':' + (  @dbUrl.getHost() == 'mem' ? '' : '//' ) + @dbUrl.getHost() + ':' + (  @dbUrl.getPort() != 0 ? @dbUrl.getPort() : '' )  + @dbUrl.getPath() }" />
 		<property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }" />
-		<property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }" />
+		<property name="password" value="#{ ( @dbUrl.getUserInfo().split(':')[1] == 'blank' ? '': @dbUrl.getUserInfo().split(':')[1] ) }" />
 	</bean>
 
 	<bean

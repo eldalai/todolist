@@ -13,7 +13,7 @@
 			el: $('#content'),
 			className:'box',
 			initialize:function () {
-				console.log('Initializing User registration View');
+//				console.log('Initializing User registration View');
 				this.template = _.template(template);
 				this.model = new context.User();
 			},
@@ -58,7 +58,7 @@
 					dataType:"json",
 					data: JSON.stringify(this.model),
 					success:function (data) {
-						console.log(["Users request details: ", data]);
+//						console.log(["Users request details: ", data]);
 						
 						if(data.error) {  // If there is an error, show the error messages
 							$('.alert-error').text(data.error.text).show();

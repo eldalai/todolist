@@ -17,7 +17,7 @@
 		     		this.model = new context.Task();
 		     	}
 
-		         console.log('Initializing New Task View');
+//		         console.log('Initializing New Task View');
 
 		         this.template = _.template(template);
 
