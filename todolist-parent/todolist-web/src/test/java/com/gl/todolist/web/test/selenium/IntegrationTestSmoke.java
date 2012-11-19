@@ -66,7 +66,7 @@ public class IntegrationTestSmoke {
 		
 		Thread.sleep(10000);
 		fakeMailServer.getServer().stop();
-		assertTrue("Envio de mail de registración",fakeMailServer.getServer().getReceivedEmailSize() == 2);
+		assertTrue("Envio de mail de registracion",fakeMailServer.getServer().getReceivedEmailSize() == 2);
 	
 		//mock mail
 		Iterator emailIter =  fakeMailServer.getServer().getReceivedEmail();
