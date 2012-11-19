@@ -7,15 +7,19 @@
   <div class="control-group">
     <label class="control-label" for="inputEmail">Email</label>
     <div class="controls">
-      <input type="text" id="inputEmail" placeholder="Email">
+      <input type="text" id="inputEmail" placeholder="Email" value="<%= username %>" />
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputPassword">Password</label>
     <div class="controls">
-      <input type="password" id="inputPassword" placeholder="Password">
+      <input type="password" id="inputPassword" placeholder="Password" value="<%= password %>" />
     </div>
   </div>
+  <div class="control-group">
+	<input type="checkbox" name="remember" id="remember" <%= remember %> />
+    <label class="control-label" for="remember">Remember me</label>
+  </div>  
   <div class="control-group">
     <div class="controls">
       <button type="submit" class="btn" id="loginButton">Sign in</button>

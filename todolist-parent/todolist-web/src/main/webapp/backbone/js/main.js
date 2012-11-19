@@ -1,10 +1,16 @@
+//Modernizr.load({
+//  test: Modernizr.localstorage,
+//  nope: '/polyfills/localstorage-polyfill.js'
+//});
+
 // Require.js allows us to configure shortcut alias
 // There usage will become more apparent further along in the tutorial.
 require.config({
 		baseUrl: "js/",
 		paths: {
 			'jquery': '../lib/jquery-1.7.1.min', 'underscore': '../lib/underscore-min', 
-			'backbone': '../lib/backbone-min','bootstrap':'../lib/bootstrap.min'
+			'backbone': '../lib/backbone-min','bootstrap':'../lib/bootstrap.min'//,
+			//'localstoragepollyfill':'localstoragepollyfill'
 		},
 		shim: {
 			"underscore": {exports: '_'},"jquery": {exports: '$'},
