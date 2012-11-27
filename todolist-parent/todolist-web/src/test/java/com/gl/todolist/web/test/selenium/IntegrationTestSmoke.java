@@ -17,12 +17,14 @@ import org.testng.annotations.Test;
 import com.dumbster.smtp.SmtpMessage;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gl.todolist.web.controllers.impl.FakeMailServer;
+import com.gl.todolist.web.webdriver.resources.UITestHelper;
 import com.gl.todolist.web.webdriver.resources.WebdriverTestHelper;
 
 @ContextConfiguration( locations={"classpath:integration-test-context.xml"} )
 public class IntegrationTestSmoke extends AbstractTestNGSpringContextTests{
 
 	private HtmlUnitDriver driver;
+	private UITestHelper uiTestHelper = new UITestHelper();
 	
 	@Autowired 
 	private FakeMailServer fakeMailServer;
@@ -41,18 +43,21 @@ public class IntegrationTestSmoke extends AbstractTestNGSpringContextTests{
 	@Test
 	public void testNavigate() throws InterruptedException{
 		
+		String mail = helper.generateString(5, "text")+"@hotmail.com";
+		String pass = "123";
+		String tarea = "Correr integration-test";
+		
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("createAcount")));
 		driver.findElement(By.xpath("//*[@id='createAcount']")).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("newaccount")));
-		String mail = helper.generateString(5, "text")+"@hotmail.com";
 		driver.findElement(By.id("inputEmail")).sendKeys(mail);
-		driver.findElement(By.id("inputPassword")).sendKeys("123");
- 		driver.findElement(By.id("inputPasswordConfirmation")).sendKeys("123");
+		driver.findElement(By.id("inputPassword")).sendKeys(pass);
+ 		driver.findElement(By.id("inputPasswordConfirmation")).sendKeys(pass);
 		driver.findElement(By.id("newaccount")).click();
 		wait.until(ExpectedConditions.textToBePresentInElement(By.id("confirmation"), "Please confirm the registration by email that we sent you"));
 		
-		Thread.sleep(10000);
+		uiTestHelper.waitMoment(String.valueOf(10000));
     
 		//mock mail
 		Iterator emailIter =  fakeMailServer.getServer().getReceivedEmail();
@@ -62,7 +67,6 @@ public class IntegrationTestSmoke extends AbstractTestNGSpringContextTests{
 			if(email.getBody().contains(mail)){
 				bodyMail = email.getBody();
 			}
-			
 		}
 		
         int x = bodyMail.indexOf("#token");
@@ -75,7 +79,7 @@ public class IntegrationTestSmoke extends AbstractTestNGSpringContextTests{
 		driver.get(appUrl+"/backbone/index.html"+tokenUrl);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("loginButton")));
 		driver.findElement(By.id("inputEmail")).sendKeys(mail);
-		driver.findElement(By.id("inputPassword")).sendKeys("123");
+		driver.findElement(By.id("inputPassword")).sendKeys(pass);
 		
 		driver.findElement(By.id("loginButton")).click();
 		
@@ -83,7 +87,7 @@ public class IntegrationTestSmoke extends AbstractTestNGSpringContextTests{
 		driver.findElement(By.id("createtask")).click();
 		
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("inputTitle")));
-		driver.findElement(By.id("inputTitle")).sendKeys("Correr integration-test");
+		driver.findElement(By.id("inputTitle")).sendKeys(tarea);
 		
 		Select selectStatus = new Select(driver.findElement(By.id("status")));
 		selectStatus.selectByIndex(1);

@@ -38,8 +38,7 @@ import com.saucelabs.saucerest.SauceREST;
 public class IntegrationTestRemoteSmoke extends AbstractTestNGSpringContextTests{
 
 	@Autowired 
-	FakeMailServer fakeMailServer;
-	
+	private FakeMailServer fakeMailServer;
 	private String appUrl = "";
 	private String user = "";
 	private String key = "";
@@ -71,13 +70,16 @@ public class IntegrationTestRemoteSmoke extends AbstractTestNGSpringContextTests
 
     @Test
 	public void testNavigate() throws Exception {
+
+    	String mail = helper.generateString(5, "text")+"@hotmail.com";
+		String pass = "123";
+		String tarea = "Correr integration-test";
     	
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("createAcount")));
 		driver.findElement(By.xpath("//*[@id='createAcount']")).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("newaccount")));
-		String mail = helper.generateString(5, "text")+"@hotmail.com";
-		String pass = "123";
+		
 		driver.findElement(By.id("inputEmail")).sendKeys(mail);
 		driver.findElement(By.id("inputPassword")).sendKeys(pass);
  		driver.findElement(By.id("inputPasswordConfirmation")).sendKeys(pass);
@@ -113,7 +115,7 @@ public class IntegrationTestRemoteSmoke extends AbstractTestNGSpringContextTests
    		driver.findElement(By.id("createtask")).click();
 		
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("inputTitle")));
-		driver.findElement(By.id("inputTitle")).sendKeys("Correr integration-test");
+		driver.findElement(By.id("inputTitle")).sendKeys(tarea);
 		
 		Select selectStatus = new Select(driver.findElement(By.id("status")));
 		selectStatus.selectByIndex(1);
