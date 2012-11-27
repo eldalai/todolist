@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.dumbster.smtp.SmtpMessage;
@@ -29,11 +30,13 @@ public class IntegrationTestSmoke extends AbstractTestNGSpringContextTests{
 	@Autowired 
 	private FakeMailServer fakeMailServer;
 	private WebdriverTestHelper helper = new WebdriverTestHelper();	
-	String appUrl = "http://localhost:9090/todolist-web";
+	private String appUrl = "";
 	
 	@BeforeClass
-	public void beforeMethod(){
-
+	@Parameters({"url"})
+	public void beforeClass(String url){
+		
+		this.appUrl = url;
 		driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_3_6);		
 		driver.setJavascriptEnabled(true); 
 
