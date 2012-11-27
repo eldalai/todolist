@@ -94,8 +94,6 @@ public class IntegrationTestSmoke extends AbstractTestNGSpringContextTests{
 		driver.findElement(By.id("createnewtask")).click();
 		
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("createtask")));
-		Thread.sleep(3000);
-		
 	}
  
 	 @AfterClass

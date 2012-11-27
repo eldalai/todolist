@@ -3,7 +3,9 @@
 	thread-count="3">
 	<parameter name="serverHost" value="localhost" />
 	<parameter name="serverPort" value="4444" />
-	<parameter name="url" value="http://universia.globallogic.com.ar/CURSOS_NET_NUEVO_FRONTEND/" />
+	<parameter name="url" value="http://localhost:9090/todolist-web" />
+	<parameter name="user" value="sushiro" />
+	<parameter name="key" value="398c29c4-20bb-4029-a59f-c6aa148dc1c9" />
 	
     <test name="Test rest">
 	    <parameter name="browser"  value="firefox"/>

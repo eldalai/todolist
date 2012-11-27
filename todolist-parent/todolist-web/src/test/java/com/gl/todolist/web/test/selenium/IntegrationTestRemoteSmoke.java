@@ -21,6 +21,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -39,21 +40,31 @@ public class IntegrationTestRemoteSmoke extends AbstractTestNGSpringContextTests
 	@Autowired 
 	FakeMailServer fakeMailServer;
 	
-	String appUrl = "http://localhost:9090/todolist-web";
-	
+	private String appUrl = "";
+	private String user = "";
+	private String key = "";
     private WebDriver driver;
     private DesiredCapabilities capabillities;
     private UITestHelper uiTestHelper = new UITestHelper();
     private WebdriverTestHelper helper = new WebdriverTestHelper();
     private SauceTunnelManager sauceTunnelManager = new SauceConnectTwoManager();
     
+    
     @BeforeClass
-    @Parameters({ "browser", "version", "platform" })
-	public void setUp(String browser, String version, String platform) throws Exception {
+    @Parameters({"url","user","key"})
+    public void beforeClass(String url, String user, String key) throws IOException{
+    	this.appUrl = url;
+    	this.user = user;
+    	this.key = key;
     	saucelabsConnect();
+    }
+    
+    @BeforeMethod
+    @Parameters({ "browser", "version", "platform" })
+	public void beforeMethod(String browser, String version, String platform) throws Exception {
         capabillities = uiTestHelper.getDesiredCapability(browser, platform, version);
         this.driver = new RemoteWebDriver(
-					  new URL("http://sushiro:398c29c4-20bb-4029-a59f-c6aa148dc1c9@ondemand.saucelabs.com:80/wd/hub"),
+					  new URL("http://"+user+":"+key+"@ondemand.saucelabs.com:80/wd/hub"),
 					  capabillities);
         driver.navigate().to(appUrl+"/backbone/index.html");
     }
@@ -66,13 +77,14 @@ public class IntegrationTestRemoteSmoke extends AbstractTestNGSpringContextTests
 		driver.findElement(By.xpath("//*[@id='createAcount']")).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("newaccount")));
 		String mail = helper.generateString(5, "text")+"@hotmail.com";
+		String pass = "123";
 		driver.findElement(By.id("inputEmail")).sendKeys(mail);
-		driver.findElement(By.id("inputPassword")).sendKeys("123");
- 		driver.findElement(By.id("inputPasswordConfirmation")).sendKeys("123");
+		driver.findElement(By.id("inputPassword")).sendKeys(pass);
+ 		driver.findElement(By.id("inputPasswordConfirmation")).sendKeys(pass);
 		driver.findElement(By.id("newaccount")).click();
 		wait.until(ExpectedConditions.textToBePresentInElement(By.id("confirmation"), "Please confirm the registration by email that we sent you"));
 		
-		Thread.sleep(10000);
+		uiTestHelper.waitMoment(String.valueOf(10000));
 		//mock mail
 		Iterator emailIter =  fakeMailServer.getServer().getReceivedEmail();
 		String bodyMail = null;
@@ -81,7 +93,6 @@ public class IntegrationTestRemoteSmoke extends AbstractTestNGSpringContextTests
 			if(email.getBody().contains(mail)){
 				bodyMail = email.getBody();
 			}
-			
 		}
 
         int x = bodyMail.indexOf("#token");
@@ -94,12 +105,12 @@ public class IntegrationTestRemoteSmoke extends AbstractTestNGSpringContextTests
 		driver.get(appUrl+"/backbone/index.html"+tokenUrl);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("loginButton")));
 		driver.findElement(By.id("inputEmail")).sendKeys(mail);
-		driver.findElement(By.id("inputPassword")).sendKeys("123");
+		driver.findElement(By.id("inputPassword")).sendKeys(pass);
 		
 		driver.findElement(By.id("loginButton")).click();
 		
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("createtask")));
-		driver.findElement(By.id("createtask")).click();
+   		driver.findElement(By.id("createtask")).click();
 		
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("inputTitle")));
 		driver.findElement(By.id("inputTitle")).sendKeys("Correr integration-test");
@@ -113,13 +124,12 @@ public class IntegrationTestRemoteSmoke extends AbstractTestNGSpringContextTests
 		driver.findElement(By.id("createnewtask")).click();
 		
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("createtask")));
-		Thread.sleep(3000);
     }
 
     @AfterMethod(alwaysRun = true)
-	public void tearDown(ITestResult testResult) throws Exception {
+	public void afterMethod(ITestResult testResult) throws Exception {
         String jobID = ((RemoteWebDriver)driver).getSessionId().toString();
-        SauceREST client = new SauceREST("sushiro", "398c29c4-20bb-4029-a59f-c6aa148dc1c9");
+        SauceREST client = new SauceREST(user, key);
         Map<String, Object>sauceJob = new HashMap<String, Object>();
         sauceJob.put("name", "Test method: "+testResult.getMethod().getMethodName());
         if(testResult.isSuccess()) {
@@ -129,7 +139,7 @@ public class IntegrationTestRemoteSmoke extends AbstractTestNGSpringContextTests
             client.jobFailed(jobID);
         }
         client.updateJobInfo(jobID, sauceJob);
-        sauceTunnelManager.closeTunnelsForPlan("sushiro", null);
+        sauceTunnelManager.closeTunnelsForPlan(user, null);
         driver.quit();
     }
     
@@ -137,8 +147,8 @@ public class IntegrationTestRemoteSmoke extends AbstractTestNGSpringContextTests
     	final SauceOnDemandAuthentication c = new SauceOnDemandAuthentication();
         System.out.println("Starting a tunnel");
         
-        c.setUsername("sushiro");
-        c.setAccessKey("398c29c4-20bb-4029-a59f-c6aa148dc1c9");
+        c.setUsername(user);
+        c.setAccessKey(key);
         Authenticator.setDefault(
                 new Authenticator() {
                     public PasswordAuthentication getPasswordAuthentication() {
