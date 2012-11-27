@@ -72,7 +72,22 @@
 			<version>2.25.0</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.7</version>
+		</dependency>
+<!-- 		saucelabs -->
+		<dependency>
+		    <groupId>com.saucelabs</groupId>
+		    <artifactId>sauce_testng</artifactId>
+		    <version>1.0.9</version>
+		</dependency>
+        <dependency>
+            <groupId>com.saucelabs</groupId>
+            <artifactId>sauce-connect</artifactId>
+            <version>3.0.18</version>
+        </dependency>
 
 	</dependencies>
 
@@ -84,12 +99,9 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-<!-- 					<encoding>Cp1252</encoding> -->
-					<encoding>UTF-8</encoding>
+					<encoding>Cp1252</encoding>
 				</configuration>
 			</plugin>
-
-
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -145,12 +157,24 @@
 
 			</plugin>
 
-
-
-
 		</plugins>
 
 	</build>
+	
+	<repositories>
+<!-- 		repo saucelabs -->
+    	<repository>
+	        <id>saucelabs-repository</id>
+	        <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
+	        <releases>
+	            <enabled>true</enabled>
+	        </releases>
+	        <snapshots>
+	            <enabled>true</enabled>
+	        </snapshots>
+    	</repository>
+	</repositories>
+	
 	<profiles>
 		<profile>
 			<id>heroku</id>
@@ -200,10 +224,11 @@
 			<id>integration-test</id>
 			<build>
 				<plugins>
+          
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.5</version>
+						<version>2.11</version>
 						<configuration>
 							<skip>true</skip>
 						</configuration>
@@ -222,19 +247,6 @@
 								</configuration>
 							</execution>
 
-							<execution>
-								<id>surefire-itest</id>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<configuration>
-									<skip>false</skip>
-									<includes>
-										<include>**/IntegrationTest*.java</include>
-									</includes>
-								</configuration>
-							</execution>
 						</executions>
 					</plugin>
 
@@ -273,6 +285,30 @@
 							</execution>
 						</executions>
 					</plugin>
+					
+						<plugin>
+					      <groupId>org.apache.maven.plugins</groupId>
+					      <artifactId>maven-failsafe-plugin</artifactId>
+					      <version>2.5</version>
+					      <configuration>
+					        <suiteXmlFiles>
+					          <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+					        </suiteXmlFiles>
+<!-- 					        <includes> -->
+<!-- 					          <include>**/IntegrationTest*.java</include> -->
+<!-- 					        </includes> -->
+					      </configuration>
+					      <executions>
+					        <execution>
+					          <id>integration-test</id>
+					          <phase>integration-test</phase>
+					          <goals>
+					            <goal>integration-test</goal>
+					          </goals>
+					        </execution>
+					      </executions>
+					    </plugin>
+				    
 				</plugins>
 			</build>
 		</profile>

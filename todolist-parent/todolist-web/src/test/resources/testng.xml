@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="REGRESSION TESTS" parallel="classes" verbose="1"
+	thread-count="3">
+	<parameter name="serverHost" value="localhost" />
+	<parameter name="serverPort" value="4444" />
+	<parameter name="url" value="http://universia.globallogic.com.ar/CURSOS_NET_NUEVO_FRONTEND/" />
+	
+    <test name="Test rest">
+	    <parameter name="browser"  value="firefox"/>
+	    <classes>
+	    	<class name="com.gl.todolist.web.test.IntegrationTestRestUser"/>
+	  	</classes>
+	</test>  
+	
+    <test name="Run on windows">
+	    <parameter name="browser"  value="iexplore"/>
+	    <parameter name="version"  value="9"/>
+	    <parameter name="platform"  value="vista"/>
+	    <classes>
+	    	<class name="com.gl.todolist.web.test.selenium.IntegrationTestRemoteSmoke"/>
+	  	</classes>
+	</test>
+	
+    <test name="Run on linux">
+	    <parameter name="browser"  value="firefox"/>
+	    <parameter name="version"  value="10"/>
+	    <parameter name="platform"  value="linux"/>
+	    <classes>
+	    	<class name="com.gl.todolist.web.test.selenium.IntegrationTestRemoteSmoke"/>
+	  	</classes>
+	</test>
+	
+	
+    <test name="Html Unit">
+	    <classes>
+	    	<class name="com.gl.todolist.web.test.selenium.IntegrationTestSmoke"/>
+	  	</classes>
+	</test>    
+
+</suite>
