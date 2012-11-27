@@ -51,8 +51,7 @@ public class IntegrationTestRemoteSmoke extends AbstractTestNGSpringContextTests
     @Parameters({ "browser", "version", "platform" })
 	public void setUp(String browser, String version, String platform) throws Exception {
     	saucelabsConnect();
-        capabillities = uiTestHelper.getDesiredCapability(browser, platform);
-        capabillities.setCapability("version", version);
+        capabillities = uiTestHelper.getDesiredCapability(browser, platform, version);
         this.driver = new RemoteWebDriver(
 					  new URL("http://sushiro:398c29c4-20bb-4029-a59f-c6aa148dc1c9@ondemand.saucelabs.com:80/wd/hub"),
 					  capabillities);

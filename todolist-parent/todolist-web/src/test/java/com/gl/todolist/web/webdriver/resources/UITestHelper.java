@@ -24,7 +24,7 @@ import org.testng.Reporter;
 
 public class UITestHelper {
 
-	public DesiredCapabilities getDesiredCapability(String browser, String plataform) {
+	public DesiredCapabilities getDesiredCapability(String browser, String plataform, String version) {
 		DesiredCapabilities capability = null;
 
 		if (browser.equalsIgnoreCase("firefox")) {
@@ -44,6 +44,7 @@ public class UITestHelper {
 			capability.setBrowserName("chrome");
 			capability.setPlatform(getPlatform( plataform, capability));
 		}
+		capability.setVersion(version);
 		capability.setJavascriptEnabled(true);
 		return capability;
 	}
