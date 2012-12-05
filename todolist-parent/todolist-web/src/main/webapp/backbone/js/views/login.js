@@ -49,10 +49,10 @@
 				var password = $('#inputPassword').val();
 				var remember = $('#remember').is(':checked');
 				$.ajax({
-					url:'../rest/session',
+					url:'../login', //j_spring_security_check
 					type:'POST',
-					dataType:"json",
-					data: { email: username, password: password },
+					//dataType:"json",
+					data: { j_username: username, j_password: password },
 					success:function (data) {
 //						console.log(["Login request details: ", data]);
 						

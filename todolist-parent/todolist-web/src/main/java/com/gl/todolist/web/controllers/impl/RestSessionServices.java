@@ -6,6 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +44,13 @@ public class RestSessionServices extends UserController implements IRestSessionS
 			throw new SecurityException();
 		}
 		if( user != null )
+		{
+			GrantedAuthority[] authorities = new GrantedAuthorityImpl [1];
+			authorities[0] = new GrantedAuthorityImpl("ROLE_USER");
+			Authentication auth = new UsernamePasswordAuthenticationToken(email, password, authorities );
+			SecurityContextHolder.getContext().setAuthentication(auth );
 			session.setAttribute("user", user);
+		}
 		return user;
 	}
 	

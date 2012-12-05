@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,18 +41,23 @@ public class RestTaskServices extends UserController implements IRestTaskService
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public Task saveTask(@RequestBody Task task, HttpSession session) throws UserException{
-		User user = (User)session.getAttribute("user");
+		User user = getLoggedUser();
 		if(user!=null){
 			task.setUser(user);	
 		}		
 		return iTaskServices.saveUpdateTask(task);
+	}
+
+	private User getLoggedUser() {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getDetails();
+		return user;
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
 	public Task updateTask(@RequestBody @Valid Task task,HttpSession session) throws UserException{
-		User user = (User)session.getAttribute("user");
+		User user = getLoggedUser();
 		if(user!=null){
 			task.setUser(user);	
 		}	
@@ -69,7 +75,7 @@ public class RestTaskServices extends UserController implements IRestTaskService
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<Task> listTasks(HttpSession session){
-		User user = (User) session.getAttribute("user");
+		User user = getLoggedUser();
 		if( user == null )
 			throw new SecurityException("No user in session");
 		return iTaskServices.listTask( user );
@@ -81,5 +87,6 @@ public class RestTaskServices extends UserController implements IRestTaskService
 	public Task findTask(@PathVariable Long id) throws EntityNotFoundException{
 		return iTaskServices.findTask(id);
 	}
+	
 	
 }

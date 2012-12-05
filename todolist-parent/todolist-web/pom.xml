@@ -16,10 +16,13 @@
 
 	<properties>
 		<jetty.version>7.5.4.v20111024</jetty.version>
+		<spring-security.version>3.0.7.RELEASE</spring-security.version>
+		<spring.version>3.1.2.RELEASE</spring.version>
+		<cglib.version>2.2.2</cglib.version>
 	</properties>
 
 	<dependencies>
- 
+
 		<dependency>
 			<groupId>com.gl.todolist</groupId>
 			<artifactId>todolist-services</artifactId>
@@ -74,7 +77,35 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>${cglib.version}</version>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
+
+
 
 	<build>
 		<finalName>todolist-web</finalName>
@@ -84,7 +115,7 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-<!-- 					<encoding>Cp1252</encoding> -->
+					<!-- 					<encoding>Cp1252</encoding> -->
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -238,7 +269,7 @@
 						</executions>
 					</plugin>
 
-					<!-- Run Jetty --> 
+					<!-- Run Jetty -->
 					<plugin>
 						<groupId>org.mortbay.jetty</groupId>
 						<artifactId>maven-jetty-plugin</artifactId>
