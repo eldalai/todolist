@@ -23,7 +23,7 @@
 			
 			render:function () {
 				$(this.el).html(this.template());
-				new context.TasksListItemView({el:$('#tasklist-content', this.el)}).render();
+				new context.TasksListItemView({el:$('#tasklist-content', this.el), model:this.model}).render();
 			},
 			createtask:function(event){
 				event.preventDefault();
@@ -38,7 +38,7 @@
 			
 			initialize:function () {
 //				console.log('Initializing Tasks List View');
-				this.model = new context.TaskList();
+				//this.model = new context.TaskList();
 				this.model.bind("all", this.render, this);
 				this.model.fetch();
 				

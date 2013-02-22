@@ -1,4 +1,5 @@
 var app = app || {};
+var context = context || {};
 
 define([
         'jquery','underscore','backbone','utils','views/header','views/home','views/login','views/reassigntask',
@@ -58,7 +59,13 @@ define([
 			},
 			
 			taskslist: function() {
-				utils.renderView( 'TasksListView');
+				var tasklist = new app.TaskList();
+				tasklist.fetch({
+					success:function (data) {
+						utils.renderView( 'TasksListView', data );
+					}
+				});
+				
 			},
 			userregistration: function() {
 				utils.renderView( 'UserRegistrationView', new app.User());
