@@ -80,27 +80,63 @@
 			<artifactId>testng</artifactId>
 			<version>6.7</version>
 		</dependency>
-<!-- 		saucelabs -->
+		<!-- saucelabs -->
 		<dependency>
-		    <groupId>com.saucelabs</groupId>
-		    <artifactId>sauce_testng</artifactId>
-		    <version>1.0.9</version>
+			<groupId>com.saucelabs</groupId>
+			<artifactId>sauce_testng</artifactId>
+			<version>1.0.9</version>
+			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>com.saucelabs</groupId>
-            <artifactId>sauce-connect</artifactId>
-            <version>3.0.18</version>
-        </dependency>
-
+		<dependency>
+			<groupId>com.saucelabs</groupId>
+			<artifactId>sauce-connect</artifactId>
+			<version>3.0.18</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-expression</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>${spring-security.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-expression</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-jdbc</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring-security.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -191,21 +227,21 @@
 		</plugins>
 
 	</build>
-	
+
 	<repositories>
-<!-- 		repo saucelabs -->
-    	<repository>
-	        <id>saucelabs-repository</id>
-	        <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
-	        <releases>
-	            <enabled>true</enabled>
-	        </releases>
-	        <snapshots>
-	            <enabled>true</enabled>
-	        </snapshots>
-    	</repository>
+		<!-- repo saucelabs -->
+		<repository>
+			<id>saucelabs-repository</id>
+			<url>https://repository-saucelabs.forge.cloudbees.com/release</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
-	
+
 	<profiles>
 		<profile>
 			<id>heroku</id>
@@ -255,7 +291,7 @@
 			<id>integration-test</id>
 			<build>
 				<plugins>
-          
+
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
@@ -329,30 +365,30 @@
 							</execution>
 						</executions>
 					</plugin>
-					
-						<plugin>
-					      <groupId>org.apache.maven.plugins</groupId>
-					      <artifactId>maven-failsafe-plugin</artifactId>
-					      <version>2.5</version>
-					      <configuration>
-					        <suiteXmlFiles>
-					          <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-					        </suiteXmlFiles>
-<!-- 					        <includes> -->
-<!-- 					          <include>**/IntegrationTest*.java</include> -->
-<!-- 					        </includes> -->
-					      </configuration>
-					      <executions>
-					        <execution>
-					          <id>integration-test</id>
-					          <phase>integration-test</phase>
-					          <goals>
-					            <goal>integration-test</goal>
-					          </goals>
-					        </execution>
-					      </executions>
-					    </plugin>
-				    
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>2.5</version>
+						<configuration>
+							<suiteXmlFiles>
+								<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+							</suiteXmlFiles>
+							<!-- <includes> -->
+							<!-- <include>**/IntegrationTest*.java</include> -->
+							<!-- </includes> -->
+						</configuration>
+						<executions>
+							<execution>
+								<id>integration-test</id>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>integration-test</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
 				</plugins>
 			</build>
 		</profile>

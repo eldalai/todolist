@@ -1,5 +1,9 @@
 package com.gl.todolist.web.controllers.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,8 +49,8 @@ public class RestSessionServices extends UserController implements IRestSessionS
 		}
 		if( user != null )
 		{
-			GrantedAuthority[] authorities = new GrantedAuthorityImpl [1];
-			authorities[0] = new GrantedAuthorityImpl("ROLE_USER");
+			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>() ;
+			authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
 			Authentication auth = new UsernamePasswordAuthenticationToken(email, password, authorities );
 			SecurityContextHolder.getContext().setAuthentication(auth );
 			session.setAttribute("user", user);
