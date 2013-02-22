@@ -12,8 +12,12 @@
 			
 			el: $('#content'),
 			
-			initialize:function () {
-//				console.log('Initializing Login View');
+			url:null ,
+			
+			initialize:function (params) {
+				if( params != undefined )
+					this.url = params.url;
+
 				this.template = _.template(template);
 			},
 			
@@ -43,6 +47,7 @@
 			},
 			
 			authenticate:function (event) {
+				self = this;
 				event.preventDefault(); // Don't let this button submit the form
 				$('.alert-error').hide(); // Hide any errors on a new submit
 				var username = $('#inputEmail').val();
@@ -61,7 +66,10 @@
 							remember = false;
 						}
 						else { // If not, send them back to the home page
-							window.location.replace('#taskslist'); // todo: tasklist
+							if( self.url == null )
+								window.location.replace('#taskslist'); // todo: tasklist
+	        				else
+	        					app.application.navigate(decodeURIComponent(self.url),{trigger: true});
 						}
 					},
 					error: function( data ) {

@@ -23,22 +23,18 @@
 		pre-post-annotations="enabled" />
 
 	<security:http auto-config="false" entry-point-ref="authenticationEntryPoint">
-		<security:form-login/>
 		<security:custom-filter ref="authenticationFilter"
 			position="FORM_LOGIN_FILTER" />
-<!--		<security:custom-filter ref="" position="SESSION_MANAGEMENT_FILTER"/>	-->
 		<security:intercept-url pattern="/rest/users/**"
 			access="ROLE_USER" />
 		<security:intercept-url pattern="/rest/tasks/**"
 			access="ROLE_USER" />
 		<security:logout invalidate-session="true" logout-success-url="/backbone/index.html" logout-url="/logout" />
+		<!-- TODO: security:remember-me /-->
 	</security:http>
 	
-	<bean id="authenticationEntryPoint"
-		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-		<property name="loginFormUrl" value="/backbone/index.html" />
-	</bean>
-
+	<bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
+	
 	<bean id="authenticationFilter"
 		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
 		<property name="authenticationManager" ref="authenticationManager" />
@@ -47,20 +43,10 @@
 		<property name="filterProcessesUrl" value="/login" />
 	</bean>
 
-
 	<bean id="restAuthenticationHandler" class="com.gl.todolist.web.security.RestAuthenticationHandler" />
 
 	<security:authentication-manager alias="authenticationManager" >
-		<security:authentication-provider ref="customAuthenticationProvider"  > <!-- user-service-ref="customUserService" -->
-		</security:authentication-provider>
-		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="temporary" password="temporary"
-					authorities="ROLE_ADMIN" />
-				<security:user name="user" password="user"
-					authorities="ROLE_USER" />
-			</security:user-service>
-		</security:authentication-provider>
+		<security:authentication-provider ref="customAuthenticationProvider"  /> <!-- user-service-ref="customUserService" -->
 	</security:authentication-manager>
 	
 	<bean id="customAuthenticationProvider" class="com.gl.todolist.web.security.CustomAuthenticationProvider" />

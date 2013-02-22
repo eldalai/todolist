@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
    
    	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
 	  <property name="corePoolSize" value="5" />
@@ -13,24 +14,16 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 
 	<property name="host" > 
-		<bean class="org.springframework.jndi.JndiObjectFactoryBean">
-			<property name="jndiName" value="java:comp/env/mail/serverUrl" />
-		</bean>		
+		<jee:jndi-lookup jndi-name="java:comp/env/mail/serverUrl" />
 	</property>
 	<property name="port"> 
-		<bean class="org.springframework.jndi.JndiObjectFactoryBean">
-			<property name="jndiName" value="java:comp/env/mail/serverPort" />
-		</bean>		
+		<jee:jndi-lookup jndi-name="java:comp/env/mail/serverPort" />
 	</property>
 	<property name="username">
-		<bean class="org.springframework.jndi.JndiObjectFactoryBean">
-			<property name="jndiName" value="java:comp/env/mail/serverUser" />
-		</bean>		
+		<jee:jndi-lookup jndi-name="java:comp/env/mail/serverUser" />
 	</property>
 	<property name="password">
-		<bean class="org.springframework.jndi.JndiObjectFactoryBean">
-			<property name="jndiName" value="java:comp/env/mail/serverPassword" />
-		</bean>		
+		<jee:jndi-lookup jndi-name="java:comp/env/mail/serverPassword" />
 	</property>
 	
 	<property name="javaMailProperties">

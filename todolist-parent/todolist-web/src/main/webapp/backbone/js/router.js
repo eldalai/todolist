@@ -11,6 +11,7 @@ define([
 		app.AppRouter = Backbone.Router.extend({
 			routes:{
 				"" : "login",
+				"denied/:url":"denied",
 				"contact":"contact",
 				"userregistration":"userregistration",
 				"taskslist":"taskslist",
@@ -38,6 +39,10 @@ define([
 			
 			login: function() {
 				utils.renderView( 'LoginView' );
+			},
+			
+			denied: function(url) {
+				new app.LoginView({url:url}).render();
 			},
 			
 			reassigntask: function(id) {

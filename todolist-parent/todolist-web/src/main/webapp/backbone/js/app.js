@@ -8,6 +8,7 @@ define([
 	
 // Tell jQuery to watch for any 401 or 403 errors and handle them appropriately
 	$.ajaxSetup({
+		cache: false, // dont cached ajax's calls...
 		statusCode: {
 			401: function(){
 				// Redirect the to the login page.
@@ -16,7 +17,7 @@ define([
 			},
 			403: function() {
 				// 403 -- Access denied
-				window.location.replace('#');
+				window.location.replace('#denied/'+encodeURIComponent(window.location.hash));
 			}
 		}
 	});
