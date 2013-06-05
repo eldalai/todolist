@@ -41,11 +41,13 @@ public class UserServices implements IUserServices{
 		if(userRepository.validateNameUser(user) != null){
 			throw new UserException(MessagesExceptions.USER_EXISTS);
 		}
-		user.setStateUser(false);
-		user.setToken(utilServices.generateToken(50, null));
+		user.setStateUser(true);
+		// No molestar con mails...
+		//user.setStateUser(false);
+		//user.setToken(utilServices.generateToken(50, null));
 
 		user = userRepository.saveUpdateUser(user);
-		sendMail(user);
+//		sendMail(user);
 		return user;
 	}
 	
