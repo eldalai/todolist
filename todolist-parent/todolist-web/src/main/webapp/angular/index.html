@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="taskslist">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
+<script src="app.js"></script>
+<script src="ctrl.js"></script>
+<script src="services.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div ng-controller="CtrlTask">
+	<div ng-repeat="task in tasks">hola {{task.title}}</div>
+	<button name="boton" value="add" ng-click="add()">addd</button>
+</div>
+</body>
+</html>
