@@ -8,7 +8,7 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
-	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 
 	<import resource="application-context.xml" />
@@ -25,8 +25,8 @@
 	<security:http auto-config="false" entry-point-ref="authenticationEntryPoint">
 		<security:custom-filter ref="authenticationFilter"
 			position="FORM_LOGIN_FILTER" />
-		<security:intercept-url pattern="/rest/users/**"
-			access="ROLE_USER" />
+<!-- 		<security:intercept-url pattern="/rest/users/**" -->
+<!-- 			access="ROLE_USER" /> -->
 		<security:intercept-url pattern="/rest/tasks/**"
 			access="ROLE_USER" />
 		<security:logout invalidate-session="true" logout-success-url="/backbone/index.html" logout-url="/logout" />
