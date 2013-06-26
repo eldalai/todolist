@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiJARLocking="true" path="">   
 
-    <Environment name="todolist/url" value="http://localhost:8081/todolist-web/backbone/index.html" type="java.lang.String" override="false" />
+    <Environment name="todolist/url" value="http://localhost:8080/todolist-web/backbone/index.html" type="java.lang.String" override="false" />
   
 <!-- MYSQL -->
-
-
 	<Environment name="db/hbmDialect" value="org.hibernate.dialect.MySQLDialect" type="java.lang.String" override="false" />
 	<Environment name="db/type" value="MYSQL" type="java.lang.String" override="false" />
    	<Environment name="db/showSql" value="true" type="java.lang.Boolean" override="false" />
