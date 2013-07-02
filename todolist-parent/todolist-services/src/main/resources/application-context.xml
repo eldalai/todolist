@@ -65,10 +65,11 @@
 		</constructor-arg>
 	</bean>
 
+<!-- 
 	<bean name="databaseUrl" class="java.lang.String">
 		<constructor-arg value="#{ 'jdbc:'+ @databaseType +':' + @dbUrl.getHost() + ':' + (  @dbUrl.getPort() != 0 ? @dbUrl.getPort() : '' )  + @dbUrl.getPath() }" />
 	</bean>
-
+-->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">
