@@ -18,6 +18,8 @@
 	<context:annotation-config />
 
 	<mvc:annotation-driven />
+	
+	<security:debug/>
 
 	<security:global-method-security
 		pre-post-annotations="enabled" />
@@ -25,8 +27,11 @@
 	<security:http auto-config="false" entry-point-ref="authenticationEntryPoint">
 		<security:custom-filter ref="authenticationFilter"
 			position="FORM_LOGIN_FILTER" />
-<!-- 		<security:intercept-url pattern="/rest/users/**" -->
-<!-- 			access="ROLE_USER" /> -->
+		<!--  Cuando se registra un usuario hace un POST a /rest/users y en ese momento no está atutenticado
+			  si dejamos este filtro, no se pueden crear cuentas.
+		<security:intercept-url pattern="/rest/users/**"
+			access="ROLE_USER" />
+		-->	
 		<security:intercept-url pattern="/rest/tasks/**"
 			access="ROLE_USER" />
 		<security:logout invalidate-session="true" logout-success-url="/backbone/index.html" logout-url="/logout" />
