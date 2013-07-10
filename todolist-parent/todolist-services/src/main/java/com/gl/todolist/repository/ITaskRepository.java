@@ -10,7 +10,7 @@ import com.gl.todolist.domain.User;
 public interface ITaskRepository {
 	
 	Task saveUpdateTask(Task task);
-	void remove(Task task) throws EntityNotFoundException;
+	void remove(Long id) throws EntityNotFoundException;
 	Task find(Long id) throws EntityNotFoundException;
 	List<Task> findTasks(User user);
 	

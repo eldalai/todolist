@@ -8,12 +8,14 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gl.todolist.domain.Task;
 import com.gl.todolist.domain.User;
 import com.gl.todolist.repository.ITaskRepository;
 
 @Repository
+@Transactional
 public class JpaTaskRepository implements ITaskRepository{
 	
 	@PersistenceContext
@@ -23,8 +25,12 @@ public class JpaTaskRepository implements ITaskRepository{
 		return em.merge(task);
 	}
 
-	public void remove(Task task) throws EntityNotFoundException{
-		em.remove(find(task.getId()));
+	public void remove(Long id) throws EntityNotFoundException{
+		try {
+			em.remove(this.find(id));
+		} catch (Exception e) {
+			throw new EntityNotFoundException(e.getMessage());
+		}	
 	}
 
 	public Task find(Long id) throws EntityNotFoundException{

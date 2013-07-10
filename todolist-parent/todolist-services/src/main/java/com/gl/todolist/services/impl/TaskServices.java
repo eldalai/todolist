@@ -24,13 +24,11 @@ public class TaskServices implements ITaskServices{
 	private static final Logger logger = LoggerFactory.getLogger(TaskServices.class);
 	
 	public Task saveUpdateTask(Task task){
-		Task objTask= taskRepository.saveUpdateTask(task);
-		return objTask;
+		return taskRepository.saveUpdateTask(task);
 	}
 
 	public void deleteTask(Long id) throws EntityNotFoundException {
-		Task task = taskRepository.find(id);
-		taskRepository.remove(task);
+		taskRepository.remove(id);
 	}
 	
 	public List<Task> listTask(User user){
@@ -38,8 +36,7 @@ public class TaskServices implements ITaskServices{
 	}
 
 	public Task findTask(Long id) throws EntityNotFoundException {
-		Task task = taskRepository.find(id);
-		return task;
+		return taskRepository.find(id);
 	}
 		
 }
