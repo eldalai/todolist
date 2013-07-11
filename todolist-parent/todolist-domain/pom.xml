@@ -1,16 +1,36 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-      <artifactId>todolist-parent</artifactId>
-  	  <groupId>com.gl.todolist</groupId>
-	  <version>0.0.1-SNAPSHOT</version>
-   </parent>	
-  <groupId>com.gl.todolist</groupId>
-  <artifactId>todolist-domain</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>todolist-parent</artifactId>
+		<groupId>com.gl.todolist</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.gl.todolist</groupId>
+	<artifactId>todolist-domain</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 
-  <name>todolist-domain</name>
-  <url>http://maven.apache.org</url>
+	<name>todolist-domain</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-entitymanager.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+		
+	</dependencies>
 
 </project>

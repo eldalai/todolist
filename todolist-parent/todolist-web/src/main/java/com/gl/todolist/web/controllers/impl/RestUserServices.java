@@ -31,7 +31,7 @@ public class RestUserServices extends UserController implements IRestUserService
 	@Autowired
 	IUserServices iUserServices;
 
-	@RequestMapping(value = "/", method = RequestMethod.POST, consumes="application/json")
+	@RequestMapping(method = RequestMethod.POST, consumes="application/json")
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public User saveUser(@RequestBody User user) throws UserException{
