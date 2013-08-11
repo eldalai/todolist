@@ -25,6 +25,8 @@ import com.gl.todolist.domain.User;
 import com.gl.todolist.services.IUserServices;
 import com.gl.todolist.services.exceptions.UserException;
 import com.gl.todolist.web.controllers.IRestSessionServices;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 @Controller
 @RequestMapping("/session")
@@ -39,23 +41,29 @@ public class RestSessionServices extends UserController implements IRestSessionS
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
-	@ResponseBody
-	public User login(String email, String password,  HttpSession session) throws UserException {
+	public void login(@RequestBody Login loginInfo, HttpSession session) throws UserException {
 		User user;
 		try {
-			user = userServices.login(email, password);
+			user = userServices.login(loginInfo.getEmail(), loginInfo.getPassword());
 		} catch (EntityNotFoundException e) {
 			throw new SecurityException();
 		}
-		if( user != null )
-		{
+		if (user != null) {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>() ;
 			authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
-			Authentication auth = new UsernamePasswordAuthenticationToken(email, password, authorities );
-			SecurityContextHolder.getContext().setAuthentication(auth );
+			Authentication auth = new UsernamePasswordAuthenticationToken(
+					loginInfo.getEmail(), loginInfo.getPassword(), authorities);
+			SecurityContextHolder.getContext().setAuthentication(auth);
 			session.setAttribute("user", user);
 		}
-		return user;
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE)
+	@ResponseStatus(value = HttpStatus.ACCEPTED)
+	public void logout(HttpSession session) throws UserException {
+		SecurityContextHolder.getContext().setAuthentication(null);
+		session.removeAttribute("user");
+		session.invalidate();
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
