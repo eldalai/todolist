@@ -25,6 +25,7 @@ import com.gl.todolist.domain.User;
 import com.gl.todolist.services.IUserServices;
 import com.gl.todolist.services.exceptions.UserException;
 import com.gl.todolist.web.controllers.IRestSessionServices;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
@@ -51,16 +52,17 @@ public class RestSessionServices extends UserController implements IRestSessionS
 		if (user != null) {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>() ;
 			authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
-			Authentication auth = new UsernamePasswordAuthenticationToken(
+			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
 					loginInfo.getEmail(), loginInfo.getPassword(), authorities);
+			auth.setDetails(user);
 			SecurityContextHolder.getContext().setAuthentication(auth);
 			session.setAttribute("user", user);
 		}
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE)
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(value = HttpStatus.ACCEPTED)
-	public void logout(HttpSession session) throws UserException {
+	public void logout(@PathVariable String id, HttpSession session) throws UserException {
 		SecurityContextHolder.getContext().setAuthentication(null);
 		session.removeAttribute("user");
 		session.invalidate();
