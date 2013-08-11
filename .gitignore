@@ -22,3 +22,4 @@
 target/
 
 context.xml
+/todolist-parent/todolist-web/nb-configuration.xml
