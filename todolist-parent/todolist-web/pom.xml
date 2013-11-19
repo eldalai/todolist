@@ -17,8 +17,7 @@
 
 	<properties>
 		<jetty.version>7.5.4.v20111024</jetty.version>
-		<spring-security.version>3.1.2.RELEASE</spring-security.version>
-		<cglib.version>2.2.2</cglib.version>
+		<spring-security.version>3.1.4.RELEASE</spring-security.version>
 	</properties>
 
 	<dependencies>
@@ -94,14 +93,6 @@
 			<version>${spring-security.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>${cglib.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-
-
 
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
@@ -110,64 +101,94 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path</artifactId>
+		    <version>0.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path-assert</artifactId>
+		    <version>0.8.1</version>
+		    <scope>test</scope>
+		</dependency>
+
+
 		<!-- Sass Support -->
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-plugin-api</artifactId>
-			<version>3.0.4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jruby</groupId>
-			<artifactId>jruby-complete</artifactId>
-			<version>1.6.7.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>13.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jasig.maven</groupId>
-			<artifactId>sass-maven-plugin</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<!-- selenium -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>2.25.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
-			<version>2.25.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-htmlunit-driver</artifactId>
-			<version>2.25.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>6.7</version>
-		</dependency>
-		<!-- saucelabs -->
-		<dependency>
-			<groupId>com.saucelabs</groupId>
-			<artifactId>sauce_testng</artifactId>
-			<version>1.0.9</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.saucelabs</groupId>
-			<artifactId>sauce-connect</artifactId>
-			<version>3.0.18</version>
-			<scope>test</scope>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.maven</groupId> -->
+<!-- 			<artifactId>maven-plugin-api</artifactId> -->
+<!-- 			<version>3.0.4</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jruby</groupId> -->
+<!-- 			<artifactId>jruby-complete</artifactId> -->
+<!-- 			<version>1.6.7.1</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.google.guava</groupId> -->
+<!-- 			<artifactId>guava</artifactId> -->
+<!-- 			<version>13.0</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jasig.maven</groupId> -->
+<!-- 			<artifactId>sass-maven-plugin</artifactId> -->
+<!-- 			<version>1.0.0</version> -->
+<!-- 		</dependency> -->
+ 		<!-- selenium -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.seleniumhq.selenium</groupId> -->
+<!-- 			<artifactId>selenium-java</artifactId> -->
+<!-- 			<version>2.25.0</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.seleniumhq.selenium</groupId> -->
+<!-- 			<artifactId>selenium-server</artifactId> -->
+<!-- 			<version>2.25.0</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.seleniumhq.selenium</groupId> -->
+<!-- 			<artifactId>selenium-htmlunit-driver</artifactId> -->
+<!-- 			<version>2.25.0</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.testng</groupId> -->
+<!-- 			<artifactId>testng</artifactId> -->
+<!-- 			<version>6.7</version> -->
+<!-- 		</dependency> -->
+	 		<!-- saucelabs -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.saucelabs</groupId> -->
+<!-- 			<artifactId>sauce_testng</artifactId> -->
+<!-- 			<version>1.0.9</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.saucelabs</groupId> -->
+<!-- 			<artifactId>sauce-connect</artifactId> -->
+<!-- 			<version>3.0.18</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+		
+		<!-- Se usa para TestBase para tener un contexto JNDI en los test -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.xbean</groupId> -->
+<!-- 			<artifactId>xbean-spring</artifactId> -->
+<!-- 			<version>${xbean-spring.version}</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 			<exclusions> -->
+<!-- 				<exclusion> -->
+<!-- 					<artifactId>commons-logging</artifactId> -->
+<!-- 					<groupId>commons-logging</groupId> -->
+<!-- 				</exclusion> -->
+<!-- 			</exclusions> -->
+<!-- 		</dependency> -->
+		
 		
 	</dependencies>
 
@@ -183,25 +204,6 @@
 				<configuration>
 					<encoding>Cp1252</encoding>
 				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-					<additionalProjectnatures>
-						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-					</additionalProjectnatures>
-					<wtpmanifest>true</wtpmanifest>
-					<wtpapplicationxml>true</wtpapplicationxml>
-					<wtpversion>${wtp.version}</wtpversion>
-					<manifest>${basedir}/src/main/resources/META-INF/MANIFEST.MF</manifest>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>generate-resources</phase>
-					</execution>
-				</executions>
 			</plugin>
 
 			<plugin>
@@ -237,6 +239,20 @@
 					</execution>
 				</executions>
 
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.11</version>
+				<configuration>
+					<includes>
+						<include>**/RestUserTest.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/IntegrationRestUserTest.java</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 
 		</plugins>
@@ -307,54 +323,17 @@
 			<build>
 				<plugins>
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.11</version>
-						<configuration>
-							<skip>true</skip>
-						</configuration>
-						<executions>
-							<execution>
-								<id>surefire-test</id>
-								<phase>test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<configuration>
-									<skip>false</skip>
-									<excludes>
-										<exclude>**/IntegrationTest*.java</exclude>
-									</excludes>
-								</configuration>
-							</execution>
-
-							<execution>
-								<id>surefire-itest</id>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<configuration>
-									<skip>false</skip>
-									<includes>
-										<include>**/IntegrationTest*.java</include>
-									</includes>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
 					<!-- Run Jetty -->
 					<plugin>
 						<groupId>org.mortbay.jetty</groupId>
 						<artifactId>maven-jetty-plugin</artifactId>
 						<version>6.1.24</version>
 						<configuration>
-							<jettyEnvXml>src/test/resources/jetty-env-integration-test.xml</jettyEnvXml>
+	 						<jettyEnvXml>src/test/resources/jetty-env-integration-test.xml</jettyEnvXml>
+<!-- 							<jettyEnvXml>src/main/webapp/WEB-INF/jetty-env.xml</jettyEnvXml>							 -->
 							<connectors>
 								<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-									<port>9090</port>
+									<port>8080</port>
 								</connector>
 							</connectors>
 							<stopKey>stop</stopKey>
@@ -386,12 +365,12 @@
 						<artifactId>maven-failsafe-plugin</artifactId>
 						<version>2.5</version>
 						<configuration>
-							<suiteXmlFiles>
-								<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-							</suiteXmlFiles>
-							<!-- <includes> -->
-							<!-- <include>**/IntegrationTest*.java</include> -->
-							<!-- </includes> -->
+<!-- 							<suiteXmlFiles> -->
+<!-- 								<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile> -->
+<!-- 							</suiteXmlFiles> -->
+							<includes>
+								<include>**/IntegrationRestUserTest.java</include>
+							</includes>
 						</configuration>
 						<executions>
 							<execution>

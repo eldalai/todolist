@@ -15,7 +15,14 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+
+
+
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Objects;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity(name="users")
@@ -59,6 +66,10 @@ public class User implements Serializable{
 		return password;
 	}
 
+	//cambio desde Json 1.9. En la version anterior, con Json 1.6, el JsonIgnore en getPassword
+	//no tenía ningun efecto en setPassword. A partir de la 1.9 si se pone @JsonIgnore en getPassword
+	//tambien ignora el setPassword
+	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -87,5 +98,10 @@ public class User implements Serializable{
 		this.token = token;
 	}
 	
-			
+	public String toString() {
+		return Objects.toStringHelper(this).add("id", id)
+										   .add("name", name)
+										   .omitNullValues()
+										   .toString();
+	}			
 }

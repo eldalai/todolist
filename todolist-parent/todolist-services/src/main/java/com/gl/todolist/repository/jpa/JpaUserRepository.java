@@ -30,7 +30,7 @@ public class JpaUserRepository implements IUserRepository{
 	public User find(Long id) throws EntityNotFoundException{
 		User user = em.find(User.class, id);
 		if( user == null )
-			throw new EntityNotFoundException();
+			throw new EntityNotFoundException("User with id " + id + " does not exist.");
 		return user;
 	}
 	

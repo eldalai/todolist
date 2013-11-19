@@ -11,7 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.google.common.base.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity(name="tasks")
 public class Task implements Serializable{
@@ -69,6 +72,13 @@ public class Task implements Serializable{
 	
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public String toString() {
+		return Objects.toStringHelper(this).add("id", id)
+										   .add("title", title)
+										   .omitNullValues()
+										   .toString();
 	}
 	
 }

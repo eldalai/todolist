@@ -37,27 +37,7 @@ public class RestSessionServices extends UserController implements IRestSessionS
 		super();
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	@ResponseStatus(value = HttpStatus.OK)
-	@ResponseBody
-	public User login(String email, String password,  HttpSession session) throws UserException {
-		User user;
-		try {
-			user = userServices.login(email, password);
-		} catch (EntityNotFoundException e) {
-			throw new SecurityException();
-		}
-		if( user != null )
-		{
-			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>() ;
-			authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
-			Authentication auth = new UsernamePasswordAuthenticationToken(email, password, authorities );
-			SecurityContextHolder.getContext().setAuthentication(auth );
-			session.setAttribute("user", user);
-		}
-		return user;
-	}
-	
+
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody

@@ -1,3 +1,4 @@
+<%@ page session="false" %>
 <html>
 <body>
 <h2>REST API!</h2>

@@ -15,15 +15,17 @@
 		<junit.version>4.8.1</junit.version>
 		<jre.version>1.6</jre.version>
 		<wtp.version>2.0</wtp.version>
-		<spring.version>3.1.2.RELEASE</spring.version> 
+		<spring.version>3.2.3.RELEASE</spring.version> 
 		<slf4j.version>1.6.1</slf4j.version>
 		<log4j.version>1.2.16</log4j.version>
 		<hsqldb.version>2.2.8</hsqldb.version>
 		<hibernate-entitymanager.version>3.4.0.GA</hibernate-entitymanager.version>
 		<hibernate-validator.version>4.0.1.GA</hibernate-validator.version>
 		<xbean-spring.version>3.7</xbean-spring.version>
-		<jackson.version>1.6.0</jackson.version>
+		<jackson.version>2.2.2</jackson.version>
 		<dumbster.version>1.6</dumbster.version>
+		<guava.version>15.0</guava.version>
+		<commons-lang3.version>3.1</commons-lang3.version>
 	</properties>
 
 	<!-- Las dependencias de Spring que tiene Spring Security las declaro vía dependencyManagement
@@ -112,10 +114,22 @@
 
 		<!-- Json Support -->
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson.version}</version>
+		  <groupId>com.fasterxml.jackson.core</groupId>
+		  <artifactId>jackson-annotations</artifactId>
+		  <version>${jackson.version}</version>
 		</dependency>
+		<dependency>
+		  <groupId>com.fasterxml.jackson.core</groupId>
+		  <artifactId>jackson-core</artifactId>
+		  <version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.fasterxml.jackson.core</groupId>
+		  <artifactId>jackson-databind</artifactId>
+		  <version>${jackson.version}</version>
+		</dependency>
+		
+		
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -141,6 +155,29 @@
 			<scope>runtime</scope>
 		</dependency>
 
+<!-- Estaba porobando para ver si podía re		
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>apache-log4j-extras</artifactId>
+			<version>1.1</version>
+		</dependency>		
+--> 		
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+			<scope>test</scope>
+		</dependency>
+            		
+
+		
 	</dependencies>
 
 	<modules>
@@ -164,6 +201,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
 				<configuration>
 					<additionalProjectnatures>
 						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
@@ -178,14 +216,6 @@
 						<phase>generate-resources</phase>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -14,5 +14,16 @@
 	</bean>
 
 	<bean id="fakeMailServer" class="com.gl.todolist.web.controllers.impl.FakeMailServer" />
+	
+	<bean id="dataBaseHelper" class="com.gl.todolist.web.test.rest.DataBaseHelper" />
+	
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/todolist" />
+		<property name="username" value="todolist" />
+		<property name="password" value="todo" />
+	</bean>
+
 
 </beans>
