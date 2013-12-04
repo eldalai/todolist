@@ -27,7 +27,9 @@ public class JpaTaskRepository implements ITaskRepository{
 
 	public void remove(Long id) throws EntityNotFoundException{
 		try {
-			em.remove(this.find(id));
+			em.createQuery("DELETE tasks where id = :taskId")
+				.setParameter("taskId", id)
+				.executeUpdate();
 		} catch (Exception e) {
 			throw new EntityNotFoundException(e.getMessage());
 		}	
