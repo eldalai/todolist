@@ -1,4 +1,4 @@
-package com.gl.todolist.web.controllers.impl;
+package com.gl.todolist.web.controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,18 +22,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.gl.todolist.domain.User;
-import com.gl.todolist.services.IUserServices;
+import com.gl.todolist.services.UserServices;
 import com.gl.todolist.services.exceptions.UserException;
-import com.gl.todolist.web.controllers.IRestSessionServices;
+
 
 @Controller
 @RequestMapping("/session")
-public class RestSessionServices extends UserController implements IRestSessionServices{
+public class ConfirmationController extends BaseController {
 
 	@Autowired
-	IUserServices userServices;
+	UserServices userServices;
 	
-	public RestSessionServices() {
+	public ConfirmationController() {
 		super();
 	}
 

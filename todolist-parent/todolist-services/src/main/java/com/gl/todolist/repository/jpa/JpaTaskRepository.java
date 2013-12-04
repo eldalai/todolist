@@ -12,11 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gl.todolist.domain.Task;
 import com.gl.todolist.domain.User;
-import com.gl.todolist.repository.ITaskRepository;
+import com.gl.todolist.repository.TaskRepository;
 
 @Repository
 @Transactional
-public class JpaTaskRepository implements ITaskRepository{
+public class JpaTaskRepository implements TaskRepository{
 	
 	@PersistenceContext
 	private EntityManager em;

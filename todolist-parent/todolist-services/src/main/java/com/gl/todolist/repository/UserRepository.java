@@ -6,7 +6,7 @@ import javax.persistence.EntityNotFoundException;
 
 import com.gl.todolist.domain.User;
 
-public interface IUserRepository{
+public interface UserRepository{
 	
 	User saveUpdateUser(User user);
 	void remove(User user) throws EntityNotFoundException;

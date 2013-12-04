@@ -12,16 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gl.todolist.domain.Task;
 import com.gl.todolist.domain.User;
-import com.gl.todolist.repository.ITaskRepository;
-import com.gl.todolist.services.ITaskServices;
+import com.gl.todolist.repository.TaskRepository;
+import com.gl.todolist.services.TaskServices;
 
 @Service
 @Transactional
-public class TaskServices implements ITaskServices{
+public class TaskServicesImpl implements TaskServices{
 	
 	@Autowired
-	ITaskRepository taskRepository;
-	private static final Logger logger = LoggerFactory.getLogger(TaskServices.class);
+	TaskRepository taskRepository;
+	private static final Logger logger = LoggerFactory.getLogger(TaskServicesImpl.class);
 	
 	public Task saveUpdateTask(Task task){
 		return taskRepository.saveUpdateTask(task);

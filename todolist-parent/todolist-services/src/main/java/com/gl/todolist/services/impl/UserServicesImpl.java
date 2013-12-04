@@ -15,23 +15,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gl.todolist.domain.User;
 import com.gl.todolist.mail.impl.SendUser;
-import com.gl.todolist.repository.IUserRepository;
-import com.gl.todolist.services.IUserServices;
-import com.gl.todolist.services.IUtilServices;
+import com.gl.todolist.repository.UserRepository;
+import com.gl.todolist.services.UserServices;
+import com.gl.todolist.services.UtilServices;
 import com.gl.todolist.services.exceptions.MessagesExceptions;
 import com.gl.todolist.services.exceptions.UserException;
 
 @Service
 @Transactional
-public class UserServices implements IUserServices{
+public class UserServicesImpl implements UserServices{
 	
 	@Autowired
-	IUserRepository userRepository;
+	UserRepository userRepository;
 	@Autowired
 	SendUser sendUser;
 	@Autowired
-	IUtilServices utilServices;
-	private static final Logger logger = LoggerFactory.getLogger(UserServices.class);
+	UtilServices utilServices;
+	private static final Logger logger = LoggerFactory.getLogger(UserServicesImpl.class);
 	
 	public User saveUser(User user) throws UserException {
 		
@@ -51,7 +51,7 @@ public class UserServices implements IUserServices{
 		return user;
 	}
 	
-	public User UpdateUser(User user) throws UserException {
+	public User updateUser(User user) throws UserException {
 		if(userRepository.validateNameUser(user) != null){
 			if(user.getId().compareTo(userRepository.validateNameUser(user).getId())!=0)
 				throw new UserException(MessagesExceptions.USER_EXISTS);

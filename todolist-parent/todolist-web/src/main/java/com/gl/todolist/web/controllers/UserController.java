@@ -1,4 +1,4 @@
-package com.gl.todolist.web.controllers.impl;
+package com.gl.todolist.web.controllers;
 
 import java.util.List;
 
@@ -16,54 +16,54 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.gl.todolist.domain.User;
-import com.gl.todolist.services.IUserServices;
+import com.gl.todolist.services.UserServices;
 import com.gl.todolist.services.exceptions.UserException;
-import com.gl.todolist.web.controllers.IRestUserServices;
+
 
 @Controller
 @RequestMapping("/users")
-public class RestUserServices extends UserController implements IRestUserServices{
+public class UserController extends BaseController {
 
-	public RestUserServices() {
+	public UserController() {
 		super();
 	}
 
 	@Autowired
-	IUserServices iUserServices;
+	UserServices userServices;
 
 	@RequestMapping(method = RequestMethod.POST, consumes="application/json")
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public User saveUser(@RequestBody User user) throws UserException{
-		return iUserServices.saveUser(user);
+		return userServices.saveUser(user);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
 	public User updateUser(@RequestBody @Valid User user) throws UserException{
-		return iUserServices.UpdateUser(user);
+		return userServices.updateUser(user);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.ACCEPTED)
 	public void deleteUser(@PathVariable Long id) throws EntityNotFoundException{
-		iUserServices.deleteUser(id);
+		userServices.deleteUser(id);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<User> listUser(){
-		return iUserServices.listUser();
+		return userServices.listUser();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
 	public User findUser(@PathVariable Long id) throws EntityNotFoundException{
-		return iUserServices.findUser(id);
+		return userServices.findUser(id);
 	}
 	
 }

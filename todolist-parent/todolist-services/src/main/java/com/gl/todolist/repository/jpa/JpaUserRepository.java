@@ -11,10 +11,10 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.gl.todolist.domain.User;
-import com.gl.todolist.repository.IUserRepository;
+import com.gl.todolist.repository.UserRepository;
 
 @Repository
-public class JpaUserRepository implements IUserRepository{
+public class JpaUserRepository implements UserRepository{
 	
 	@PersistenceContext
 	private EntityManager em;

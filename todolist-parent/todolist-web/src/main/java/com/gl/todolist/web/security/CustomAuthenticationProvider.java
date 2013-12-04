@@ -13,12 +13,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 
 import com.gl.todolist.domain.User;
-import com.gl.todolist.services.IUserServices;
+import com.gl.todolist.services.UserServices;
 
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
-	IUserServices userServices;
+	UserServices userServices;
 	
 	@Override
 	public boolean supports(Class<? extends Object> arg0) {

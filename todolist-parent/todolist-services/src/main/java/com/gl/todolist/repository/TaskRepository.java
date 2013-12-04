@@ -7,7 +7,7 @@ import javax.persistence.EntityNotFoundException;
 import com.gl.todolist.domain.Task;
 import com.gl.todolist.domain.User;
 
-public interface ITaskRepository {
+public interface TaskRepository {
 	
 	Task saveUpdateTask(Task task);
 	void remove(Long id) throws EntityNotFoundException;

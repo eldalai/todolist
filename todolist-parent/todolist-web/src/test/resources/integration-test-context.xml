@@ -13,7 +13,7 @@
 	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
 	</bean>
 
-	<bean id="fakeMailServer" class="com.gl.todolist.web.controllers.impl.FakeMailServer" />
+	<bean id="fakeMailServer" class="com.gl.todolist.web.controllers.FakeMailServer" />
 	
 	<bean id="dataBaseHelper" class="com.gl.todolist.web.test.rest.DataBaseHelper" />
 	

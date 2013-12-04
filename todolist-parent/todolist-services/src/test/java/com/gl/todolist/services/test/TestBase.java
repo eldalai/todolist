@@ -29,10 +29,10 @@ import com.gl.todolist.domain.TaskStatus;
 import com.gl.todolist.domain.TaskType;
 import com.gl.todolist.domain.User;
 import com.gl.todolist.mail.impl.SendUser;
-import com.gl.todolist.services.ITaskServices;
-import com.gl.todolist.services.IUserServices;
+import com.gl.todolist.services.TaskServices;
+import com.gl.todolist.services.UserServices;
 import com.gl.todolist.services.impl.Constants;
-import com.gl.todolist.services.impl.UserServices;
+import com.gl.todolist.services.impl.UserServicesImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:application-context.xml" })
@@ -64,9 +64,9 @@ public class TestBase extends TestCase{
 	}
 
 	@Autowired
-	protected IUserServices iUserServices;
+	protected UserServices iUserServices;
 	@Autowired
-	protected ITaskServices iTaskServices;
+	protected TaskServices iTaskServices;
 	@Autowired
 	protected SendUser sendUser;
     

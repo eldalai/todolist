@@ -5,10 +5,10 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
-import com.gl.todolist.services.IUtilServices;
+import com.gl.todolist.services.UtilServices;
 
 @Service
-public class UtilServices implements IUtilServices{
+public class UtilServicesImpl implements UtilServices{
 	
 	private Pattern pattern;
 	private Matcher matcher;

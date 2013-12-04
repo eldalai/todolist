@@ -1,4 +1,4 @@
-package com.gl.todolist.web.controllers.impl;
+package com.gl.todolist.web.controllers;
 
 import com.dumbster.smtp.SimpleSmtpServer;
 

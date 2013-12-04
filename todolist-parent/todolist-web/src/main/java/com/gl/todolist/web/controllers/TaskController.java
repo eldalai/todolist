@@ -1,4 +1,4 @@
-package com.gl.todolist.web.controllers.impl;
+package com.gl.todolist.web.controllers;
 
 import java.util.List;
 
@@ -18,21 +18,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.gl.todolist.domain.Task;
 import com.gl.todolist.domain.User;
-import com.gl.todolist.services.ITaskServices;
+import com.gl.todolist.services.TaskServices;
 import com.gl.todolist.services.exceptions.UserException;
-import com.gl.todolist.web.controllers.IRestTaskServices;
 import com.gl.todolist.web.dto.TaskDTO;
 
 @Controller
 @RequestMapping("/tasks")
-public class RestTaskServices extends UserController implements IRestTaskServices{
+public class TaskController extends BaseController {
 
-	public RestTaskServices() {
+	public TaskController() {
 		super();
 	}
 
 	@Autowired
-	ITaskServices iTaskServices;
+	TaskServices taskServices;
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
@@ -42,7 +41,7 @@ public class RestTaskServices extends UserController implements IRestTaskService
 		if(user!=null){
 			task.setUser(user);	
 		}		
-		return iTaskServices.saveUpdateTask(task);
+		return taskServices.saveUpdateTask(task);
 	}
 
 	private User getLoggedUser() {
@@ -55,12 +54,12 @@ public class RestTaskServices extends UserController implements IRestTaskService
 	@ResponseStatus(value = HttpStatus.OK)
 	public Task updateTask(@RequestBody TaskDTO taskDTO,HttpSession session) throws UserException{
 		//el cliente js tiene mal la ruta del put http://localhost:8080/todolist-web/rest/tasks/1 <-- {1}
-		Task task = iTaskServices.findTask(taskDTO.getId());
+		Task task = taskServices.findTask(taskDTO.getId());
 		if(getLoggedUser().getName().equalsIgnoreCase(task.getUser().getName())){			
 			task.setTaskStatus(taskDTO.getTaskStatus());
 			task.setTaskType(taskDTO.getTaskType());
 			task.setTitle(taskDTO.getTitle());
-			return iTaskServices.saveUpdateTask(task);
+			return taskServices.saveUpdateTask(task);
 		}else{
 			//TODO: throw security exception
 		}
@@ -71,7 +70,7 @@ public class RestTaskServices extends UserController implements IRestTaskService
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.ACCEPTED)
 	public void deleteTask(@PathVariable Long id) throws EntityNotFoundException{
-		iTaskServices.deleteTask(id);
+		taskServices.deleteTask(id);
 //		Task task = iTaskServices.findTask(id);
 //		if(getLoggedUser().getName().equalsIgnoreCase(task.getUser().getName())){			
 //			iTaskServices.deleteTask(id);
@@ -87,13 +86,13 @@ public class RestTaskServices extends UserController implements IRestTaskService
 		User user = getLoggedUser();
 		if( user == null )
 			throw new SecurityException("No user in session");
-		return iTaskServices.listTask( user );
+		return taskServices.listTask( user );
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
 	public Task findTask(@PathVariable Long id) throws EntityNotFoundException{
-		return iTaskServices.findTask(id);
+		return taskServices.findTask(id);
 	}		
 }
