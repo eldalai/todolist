@@ -3,7 +3,7 @@ package com.gl.todolist.web.test.rest;
 import static com.gl.todolist.web.test.rest.RestBaseTest.name1;
 import static com.gl.todolist.web.test.rest.RestBaseTest.pass1;
 import static junit.framework.Assert.*;
-
+import static com.gl.todolist.web.test.rest.TestUtils.*;
 
 import java.util.List;
 
@@ -60,10 +60,7 @@ public class IntegrationRestUserTest {
 	//siguientes en el header 'COOKIE_HEADER'
 	private static List<String> SESSION_COOKIE;  	
 	
-	//Nombres de los campos que Spring Security espera que sea posteen para logear un usuario 
-	private static final String SPRING_SECURITY_USER_NAME_FIELD = "j_username";
-	private static final String SPRING_SECURITY_PASSWORD_FIELD = "j_password";
-	
+
 	//La primer tarea que se crea y que luego se modifica respectivamente
 	private static Task firstTask;
 	private static Task modifiedTask;
@@ -113,7 +110,7 @@ public class IntegrationRestUserTest {
 	 */
 	@Test
 	public void createUser()  {
-		String jsonUser = RestBaseTest.createJsonUser(name1, pass1);
+		String jsonUser = createJsonUser(name1, pass1);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		
@@ -140,8 +137,7 @@ public class IntegrationRestUserTest {
 	public void loginUser()  {
 		HttpEntity<?> reqEntity = makeRequestForLogin();
 					
-		ResponseEntity<byte[]> respEntity= restTemplate.postForEntity(LOGIN, reqEntity, 
-																			byte[].class);		
+		ResponseEntity<byte[]> respEntity= restTemplate.postForEntity(LOGIN, reqEntity, byte[].class);		
 		
 	
 		HttpHeaders headers = respEntity.getHeaders();
@@ -193,7 +189,28 @@ public class IntegrationRestUserTest {
 		
 	}
 	
-
+	//El mismo test pero poniendo inline goGetTasks()
+    @Test
+    public void getTasksAndShouldHaveOneINLINE() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.put(COOKIE_HEADER, SESSION_COOKIE); 
+        
+        HttpEntity<?> reqEntity = new HttpEntity<Object>(headers);
+        ResponseEntity<Task[]> respEntity = restTemplate.exchange(TASKS, HttpMethod.GET, 
+                                                                   reqEntity, Task[].class);
+     
+        Task[] tasks = respEntity.getBody();
+            
+        assertEquals(1, tasks.length);
+        assertTrue(EqualsBuilder.reflectionEquals(firstTask, tasks[0]));
+        
+        logger.debug("Se pidio la lista de tareas del usuario " + 
+                           "y tiene la tarea agregada " + tasks[0]);
+        
+    }
+    
+	
+	
 	@Test
 	public void updateTask() {
 		HttpEntity<String> reqEntity = makeRequestWithSessionCookie(createJsonTaskDTO());		
@@ -274,10 +291,10 @@ public class IntegrationRestUserTest {
 		
 		
 		ResponseEntity<byte[]> respEntity = restTemplate.exchange(TASKS + "/{id}", 
-				HttpMethod.DELETE, 
-				reqEntity, 
-				byte[].class,
-				firstTask.getId());														
+				                                                   HttpMethod.DELETE, 
+				                                                   reqEntity, 
+				                                                   byte[].class,
+				                                                   firstTask.getId());														
 				
 		assertEquals(HttpStatus.ACCEPTED, respEntity.getStatusCode());
 		logger.debug("Se eliminó existosamente la tarea " + firstTask);			
@@ -290,15 +307,14 @@ public class IntegrationRestUserTest {
 		
 		try {
 			ResponseEntity<Task> respEntity = restTemplate.exchange(TASKS + "/{id}",  
-					HttpMethod.GET,
-					reqEntity,
-					Task.class,
-					firstTask.getId());														
+					                                                HttpMethod.GET,
+					                                                reqEntity,
+					                                                Task.class,
+					                                                firstTask.getId());														
 		}
 		catch (HttpClientErrorException e) {
 				assertEquals(HttpStatus.NOT_FOUND, e.getStatusCode());
-				logger.debug("Se busco por ID de una tarea borrada y, como se esperaba, "
-							 + "no se encontro");
+				logger.debug("Se busco por ID de una tarea borrada y, como se esperaba, no se encontro");
 				return;
 		}			
 		/**
@@ -344,38 +360,6 @@ public class IntegrationRestUserTest {
 	// *******************************************************************************
 	// *                        HELPERS VARIOS
 	// *******************************************************************************	
-	private String createJsonTask() {
-		Task task = createTask();
-		return convertToJson(task);
-	}
-
-
-	private static String convertToJson(Object object) {
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			return mapper.writeValueAsString(object);
-		} catch (JsonProcessingException e) {
-			throw new RuntimeException("No se pudo serializar object " + object, e);
-		}
-	}
-
-	private Task createTask() {
-		Task task = new Task();
-		task.setTaskStatus(TaskStatus.PENDING);
-		task.setTitle("Ir al supermercado");
-		task.setTaskType(TaskType.URGENT);
-		return task;
-	}
-
-	private String createJsonTaskDTO() {
-		TaskDTO taskDTO = new TaskDTO();
-		taskDTO.setId(firstTask.getId());
-		taskDTO.setTitle("Ir al supermercado para comprar el ASADO");
-		taskDTO.setTaskStatus(firstTask.getTaskStatus());
-		taskDTO.setTaskType(firstTask.getTaskType());
-
-		return convertToJson(taskDTO);
-	}	
 	
 	private HttpEntity<?> makeRequestWithSessionCookie() {
 		HttpHeaders headers = new HttpHeaders();
@@ -410,8 +394,19 @@ public class IntegrationRestUserTest {
 	private ResponseEntity<Task[]> doGetTasks() {
 		HttpEntity<?> reqEntity = makeRequestWithSessionCookie();
 		ResponseEntity<Task[]> respEntity = restTemplate.exchange(TASKS, HttpMethod.GET, 
-				      			   								reqEntity, Task[].class);
+		                                                          reqEntity, Task[].class);
 		return respEntity;
 	}
 		
+    private String createJsonTaskDTO() {
+        TaskDTO taskDTO = new TaskDTO();
+        taskDTO.setId(firstTask.getId());
+        taskDTO.setTitle("Ir al supermercado para comprar el ASADO");
+        taskDTO.setTaskStatus(firstTask.getTaskStatus());
+        taskDTO.setTaskType(firstTask.getTaskType());
+
+        return convertToJson(taskDTO);
+    }   
+	
+	
 }

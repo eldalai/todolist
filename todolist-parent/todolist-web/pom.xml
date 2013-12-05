@@ -247,7 +247,7 @@
 				<version>2.11</version>
 				<configuration>
 					<includes>
-						<include>**/RestUserTest.java</include>
+						<include>**/RestTestSuite.java</include>
 					</includes>
 					<excludes>
 						<exclude>**/IntegrationRestUserTest.java</exclude>
