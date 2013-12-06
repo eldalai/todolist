@@ -64,21 +64,14 @@ public class UserSessionTest extends RestBaseTest {
     @Test
     public void getTasksAndShouldByEmpty() throws Exception {
         mockMvc.perform(get("/tasks")
-               .accept(jsonType)
-               .contentType(jsonUTF8Type)
                .session(UserSessionTest.session))
                .andExpect(status().isOk())
                .andExpect(content().string(equalTo("[]")));
     }
-    
-    
-
-    
+        
     @Test
     public void addTask() throws Exception {
         MvcResult result = mockMvc.perform(post("/tasks")
-                                            .accept(jsonType)
-                                            .contentType(jsonUTF8Type)
                                             .content(createJsonTask())
                                             .session(UserSessionTest.session))
                                             .andExpect(status().isCreated())
@@ -92,15 +85,9 @@ public class UserSessionTest extends RestBaseTest {
         assertTrue(EqualsBuilder.reflectionEquals(createTask(), firstTask, "id"));            
     }
 
-
-    
-    
-    
-    @Test
+   @Test
     public void getTasksAndShouldHaveOne() throws Exception {
         MvcResult result =  mockMvc.perform(get("/tasks")
-                                            .accept(jsonType)
-                                            .contentType(jsonUTF8Type)
                                             .session(UserSessionTest.session))
                                             .andExpect(status().isOk())
                                             .andReturn();
@@ -111,8 +98,5 @@ public class UserSessionTest extends RestBaseTest {
         assertEquals(1, tasks.length);
         assertTrue(EqualsBuilder.reflectionEquals(firstTask, tasks[0]));      
     }
-    
-    
-          
-    
+        
 }

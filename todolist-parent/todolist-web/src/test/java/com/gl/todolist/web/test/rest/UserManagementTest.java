@@ -61,8 +61,7 @@ public class UserManagementTest extends RestBaseTest {
         String user2 = createJsonUser(name2, pass2);
         
         MvcResult mvcResult = this.mockMvc.perform(post("/users")
-                                                  .accept(jsonType)
-                                                  .contentType(jsonUTF8Type).content(user2))
+                                                  .content(user2))
                                                   .andExpect(status().isCreated())
                                                   .andReturn();
 
@@ -94,8 +93,7 @@ public class UserManagementTest extends RestBaseTest {
 
     @Test
     public void findById() throws Exception {
-        this.mockMvc.perform(get("/users/{id}", firstId)
-                            .accept(jsonType))
+        this.mockMvc.perform(get("/users/{id}", firstId))
                             .andExpect(status().isOk())
                             .andExpect(jsonPath("$.name", equalTo(name1)));
     }
@@ -109,8 +107,7 @@ public class UserManagementTest extends RestBaseTest {
      */
     @Test
     public void tryFindByInvalidIdAndFail() throws Exception {
-        this.mockMvc.perform(get("/users/{id}", -1)
-                            .accept(jsonType))
+        this.mockMvc.perform(get("/users/{id}", -1))
                             .andExpect(status().isNotFound())
                             .andExpect(content().string("User with id -1 does not exist."));
     }
@@ -127,8 +124,6 @@ public class UserManagementTest extends RestBaseTest {
         String user1 = createJsonUser(name1, pass1);
         
         this.mockMvc.perform(post("/users")
-                            .accept(jsonType)
-                            .contentType(jsonUTF8Type)
                             .content(user1))
                             .andExpect(status().isNotAcceptable())
                             .andExpect(content().string(MessagesExceptions.USER_EXISTS));
@@ -147,8 +142,6 @@ public class UserManagementTest extends RestBaseTest {
         String user1 = createJsonUser("pepito3@gmail.com", null);
         
         this.mockMvc.perform(post("/users")
-                            .accept(jsonType)
-                            .contentType(jsonUTF8Type)
                             .content(user1))
                             .andExpect(status().isCreated());
     }
@@ -162,8 +155,7 @@ public class UserManagementTest extends RestBaseTest {
         String user1 = createJsonUser("invalidEmail", pass1);
         
         this.mockMvc.perform(post("/users")
-                             .accept(jsonType)
-                             .contentType(jsonUTF8Type).content(user1))
+                             .content(user1))
                              .andExpect(status().isNotAcceptable())
                              .andExpect(content().string(MessagesExceptions.INVALID_MAIL));
     }
@@ -186,8 +178,6 @@ public class UserManagementTest extends RestBaseTest {
         String json = convertToJson(user);
 
         this.mockMvc.perform(put("/users")
-                            .accept(jsonType)
-                            .contentType(jsonUTF8Type)
                             .content(json))
                             .andExpect(status().isInternalServerError());
     }
@@ -202,8 +192,7 @@ public class UserManagementTest extends RestBaseTest {
      */
     @Test
     public void deleteUser() throws Exception {
-        this.mockMvc.perform(delete("/users/{id}", secondId)
-                            .accept(jsonType))
+        this.mockMvc.perform(delete("/users/{id}", secondId))
                             .andExpect(status().isAccepted());
     }
 

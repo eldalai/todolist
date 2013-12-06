@@ -1,7 +1,10 @@
 package com.gl.todolist.web.test.rest;
 
 import static org.hamcrest.Matchers.notNullValue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder.*;
+
+
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -78,6 +81,8 @@ public abstract class RestBaseTest {
     protected MockMvc mockMvc;
 
     @Autowired
+    //El filtro que contiene toda la cadena de filtro de Spring Security.
+    //La configuracion se lee de "application-context-web.xml"
     private FilterChainProxy springSecurityFilterChain;
 
     protected MediaType jsonType = MediaType.parseMediaType("application/json");
@@ -88,15 +93,14 @@ public abstract class RestBaseTest {
     protected DataBaseHelper dataBaseHelper;
 
 
-    /**
-     * TODO revisar. Con la implementacion actual, no puedo poner que siempre se espere un
-     * contentType seteado porque, cuando devuelve error, no viene seteado el contentType
-     */
+
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac)
+                .defaultRequest(get("/")
+                .accept(jsonType)
+                .contentType(jsonUTF8Type))
                 .addFilters(this.springSecurityFilterChain)
-                // .alwaysExpect(content().contentType(jsonUTF8Type))
                 .alwaysDo(print()).build();
     }
 
@@ -119,8 +123,6 @@ public abstract class RestBaseTest {
     protected void createUser1() throws Exception {
         String user1 = createJsonUser(name1, pass1);
         this.mockMvc.perform(post("/users")
-                            .accept(jsonType)
-                            .contentType(jsonUTF8Type)
                             .content(user1))
                             .andExpect(status().isCreated())
                             .andExpect(jsonPath("$.name").value(name1))
