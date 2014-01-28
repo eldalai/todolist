@@ -35,10 +35,10 @@ public class UserServicesImpl implements UserServices{
 	
 	public User saveUser(User user) throws UserException {
 		
-		if(!utilServices.emailValidator(user.getName())){
-			throw new UserException(MessagesExceptions.INVALID_MAIL);
-		}
-		if(userRepository.validateNameUser(user) != null){
+//		if(!utilServices.emailValidator(user.getName())){
+//			throw new UserException(MessagesExceptions.INVALID_MAIL);
+//		}
+		if(userRepository.findByName(user.getName()) != null){
 			throw new UserException(MessagesExceptions.USER_EXISTS);
 		}
 		user.setStateUser(true);
@@ -52,12 +52,12 @@ public class UserServicesImpl implements UserServices{
 	}
 	
 	public User updateUser(User user) throws UserException {
-		if(userRepository.validateNameUser(user) != null){
-			if(user.getId().compareTo(userRepository.validateNameUser(user).getId())!=0)
+	    User existingUser = userRepository.findByName(user.getName()); 
+		if(existingUser != null){
+			if(user.getId().compareTo(existingUser.getId())!=0)
 				throw new UserException(MessagesExceptions.USER_EXISTS);
 		}
-		User objUser= userRepository.saveUpdateUser(user);
-		return objUser;
+		return userRepository.saveUpdateUser(user);
 	}
 
 	public void deleteUser(Long id) throws EntityNotFoundException {
@@ -91,7 +91,7 @@ public class UserServicesImpl implements UserServices{
 	
 	public User userConfirmation( String email, String token )throws UserException{
 		User user = null;
-		user = userRepository.userByEmail(email);
+		user = userRepository.findByName(email);
 		if(user==null){
 			throw new UserException(MessagesExceptions.USER_NOT_FOUND);
 		}
@@ -100,18 +100,6 @@ public class UserServicesImpl implements UserServices{
 		}
 		user.setStateUser(true);
 		user = userRepository.saveUpdateUser(user);
-		return user;
-	}
-	
-	public User login(String email, String password) throws UserException {
-		User user = null;
-		user = userRepository.find(email, password);
-		if(user==null){
-			throw new UserException(MessagesExceptions.USER_NOT_FOUND);
-		}
-		if(!user.isStateUser()){
-			throw new UserException(MessagesExceptions.USER_INACTIVE);
-		}
 		return user;
 	}
 

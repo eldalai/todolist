@@ -16,6 +16,5 @@ public interface UserServices {
 	User findUser(Long id) throws EntityNotFoundException;
 	User findUser(String email, String password) throws EntityNotFoundException;
 	User userConfirmation( String email, String token)throws UserException;
-	User login(String email, String password) throws UserException;
 	
 }

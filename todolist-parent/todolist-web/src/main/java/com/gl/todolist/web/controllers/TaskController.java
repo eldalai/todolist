@@ -36,7 +36,7 @@ public class TaskController extends BaseController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Task saveTask(@RequestBody Task task, HttpSession session) throws UserException{
+	public Task saveTask(@RequestBody Task task, HttpSession session) {
 		User user = getLoggedUser();
 		if(user!=null){
 			task.setUser(user);	
@@ -52,7 +52,7 @@ public class TaskController extends BaseController {
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
-	public Task updateTask(@RequestBody TaskDTO taskDTO,HttpSession session) throws UserException{
+	public Task updateTask(@RequestBody TaskDTO taskDTO,HttpSession session) {
 		//el cliente js tiene mal la ruta del put http://localhost:8080/todolist-web/rest/tasks/1 <-- {1}
 		Task task = taskServices.findTask(taskDTO.getId());
 		if(getLoggedUser().getName().equalsIgnoreCase(task.getUser().getName())){			

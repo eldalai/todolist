@@ -40,16 +40,21 @@ public class JpaUserRepository implements UserRepository{
 		return resultList;
 	}
 	
-	public User validateNameUser(User user){
-		try{
-			Query q = em.createQuery("SELECT user FROM users user WHERE user.name = :nameUser");
-	        q.setParameter("nameUser", user.getName());
-	        return (User) q.getSingleResult();
-	  	}catch(NoResultException ex){
-			return null;
-		}
-	}
-
+	public User findByName(String email) throws EntityNotFoundException{
+        try{
+            Query q = em.createQuery("SELECT user FROM users user WHERE user.name =:nameUser");
+            q.setParameter("nameUser", email);
+            User user = (User)q.getSingleResult();
+            if(user == null)
+                throw new EntityNotFoundException();
+            return user;
+        }catch(NoResultException ex){
+            return null;
+        }
+    }
+	
+	
+	
 	@Override
 	public User find(String email, String password) throws EntityNotFoundException{
 		try{
@@ -65,17 +70,5 @@ public class JpaUserRepository implements UserRepository{
 		}
 	}
 	
-	public User userByEmail(String email) throws EntityNotFoundException{
-		try{
-			Query q = em.createQuery("SELECT user FROM users user WHERE user.name =:nameUser");
-			q.setParameter("nameUser", email);
-			User user = (User)q.getSingleResult();
-			if(user == null)
-				throw new EntityNotFoundException();
-		    return user;
-		}catch(NoResultException ex){
-			return null;
-		}
-	}
 
 }

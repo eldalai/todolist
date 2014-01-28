@@ -56,6 +56,22 @@
 	
 	<bean id="customAuthenticationProvider" class="com.gl.todolist.web.security.CustomAuthenticationProvider" />
 
+	<!-- Al validator de JSR-303 se le inyecta un resource bundle de Spring para que 
+	Spring maneje la interpolacion de los errores que valida "Bean Validation" -->
+	<bean name="validator"
+	    class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+	    <property name="validationMessageSource" ref="messageSource"/>
+	</bean>
+
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    	<property name="basename" value="i18n/messages"/>
+<!--             <property name="useCodeAsDefaultMessage" value="true"/> -->
+    </bean>
+
+
+
+
 	<!--	 form-login -->
 	<!--	<security:http auto-config="true"> -->
 	<!--		<security:form-login  -->
