@@ -26,6 +26,9 @@
 		<dumbster.version>1.6</dumbster.version>
 		<guava.version>15.0</guava.version>
 		<commons-lang3.version>3.1</commons-lang3.version>
+		<metrics.version>3.0.2</metrics.version>
+		<metrics-spring.version>3.0.0</metrics-spring.version>
+		<aspectj.version>1.8.0</aspectj.version>
 	</properties>
 
 	<!-- Las dependencias de Spring que tiene Spring Security las declaro vía dependencyManagement
@@ -70,7 +73,40 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<dependencies>
+	<dependencies>	
+	    <dependency>
+	        <groupId>com.codahale.metrics</groupId>
+	        <artifactId>metrics-core</artifactId>
+	        <version>${metrics.version}</version>
+	    </dependency>
+
+		<dependency>
+		    <groupId>com.codahale.metrics</groupId>
+		    <artifactId>metrics-servlets</artifactId>
+		    <version>${metrics.version}</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>com.ryantenney.metrics</groupId>
+		    <artifactId>metrics-spring</artifactId>
+		    <version>${metrics-spring.version}</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		    <version>${aspectj.version}</version>
+		</dependency>
+		
+		
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${aspectj.version}</version>
+		</dependency>
+
+
+	
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

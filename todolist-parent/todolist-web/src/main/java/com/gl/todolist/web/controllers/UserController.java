@@ -34,7 +34,7 @@ public class UserController extends BaseController {
 	@RequestMapping(method = RequestMethod.POST, consumes="application/json")
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public User saveUser(@RequestBody @Valid User user) throws UserException{
+	public User saveUser(@RequestBody User user) throws UserException{
 		return userServices.saveUser(user);
 	}
 	
